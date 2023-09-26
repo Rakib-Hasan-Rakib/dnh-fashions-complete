@@ -1,0 +1,16 @@
+
+
+.latest-slide {
+  background-position: center;
+  background-size: cover;
+  width: 300px;
+  height: 300px;
+}
+
+.latest-slide img {
+  display: block;
+  width: 100%;
+}
+.swiper-pagination-bullet{
+  display: none;
+}
