@@ -8,3 +8,16 @@
 .btn-two{
     @apply border border-red-600 text-red-600 md:text-xl font-semibold hover:text-white hover:bg-red-600 hover:duration-500 hover:ease-in-out px-3 md:px-6 py-1 md:py-2 rounded-md capitalize
 }
+.input-field{
+    @apply w-full border border-gray-700 rounded-sm p-2 focus:outline-green-600 placeholder:text-black
+}
+.disclaimer-header{
+    @apply text-lg font-semibold
+}
+.active{
+  @apply font-medium tracking-wide text-red-600 transition-colors duration-200 hover:text-red-600 bg-transparent
+}
+
+.default{
+  @apply font-medium tracking-wide text-white transition-colors duration-200 hover:text-red-600
+}
