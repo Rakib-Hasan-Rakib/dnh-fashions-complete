@@ -5,6 +5,8 @@ import About from "../pages/About/About";
 import Collections from "../pages/Collections/Collections";
 import Disclaimer from "../pages/Disclaimer/Disclaimer";
 import Contact from "../pages/Contact/Contact";
+import Signin from "../pages/signin/Signin";
+import Signup from "../pages/signup/Signup";
 
 const Route = createBrowserRouter([
   {
@@ -13,10 +15,13 @@ const Route = createBrowserRouter([
     children: [
       { path: "/", element: <Home /> },
       { path: "/about", element: <About /> },
-      { path: "/collections", element: <Collections /> },{path:"/contact",element:<Contact/>},
+      { path: "/collections", element: <Collections /> },
+      { path: "/contact", element: <Contact /> },
       { path: "/disclaimer", element: <Disclaimer /> },
     ],
   },
+  { path: "/signin", element: <Signin /> },
+  { path: "/signup", element: <Signup /> },
 ]);
 
 export default Route;

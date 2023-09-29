@@ -1,4 +1,5 @@
 const express = require('express')
+const jwt = require('jsonwebtoken')
 const cors = require('cors')
 require('dotenv').config()
 const app = express()
@@ -31,7 +32,30 @@ async function run() {
 
 
         const dressCollection = client.db('dnhFashionsDB').collection('dresses')
+        const usersCollection = client.db('dnhFashionsDB').collection('users')
+        
 
+        app.post('/jwt', (req, res) => {
+            const user = req.body
+            const token = jwt.sign(user, process.env.ACCESS_TOKEN_SECRET, {
+                expiresIn: '1h',
+            })
+
+            res.send({ token })
+        })
+
+        // Save user email in DB
+        app.put('/users/:email', async (req, res) => {
+            const email = req.params.email
+            const user = req.body
+            const query = { email: email }
+            const options = { upsert: true }
+            const updateDoc = {
+                $set: user,
+            }
+            const result = await usersCollection.updateOne(query, updateDoc, options)
+            res.send(result)
+        })
 
         // get all dress
         app.get('/initialDress', async (req, res) => {

@@ -10,7 +10,7 @@ const Collections = () => {
   // const [selectedRatingOpt, setSelectedRatingOpt] = useState("");
 
   useEffect(() => {
-    fetch("https://dnh-fashion-server.vercel.app/allDress")
+    fetch(`${import.meta.env.VITE_API_URL}/allDress`)
       .then((res) => res.json())
       .then((data) => {
         setAllDress(data);
@@ -23,7 +23,7 @@ const Collections = () => {
   };
 
   useEffect(() => {
-    fetch("https://dnh-fashion-server.vercel.app/allDress")
+    fetch(`${import.meta.env.VITE_API_URL}/allDress`)
       .then((res) => res.json())
       .then((data) => {
         if (selectedOpt === "default") {
@@ -33,7 +33,7 @@ const Collections = () => {
   }, [selectedOpt]);
 
   useEffect(() => {
-    fetch("https://dnh-fashion-server.vercel.app/category/mens")
+    fetch(`${import.meta.env.VITE_API_URL}/category/mens`)
       .then((res) => res.json())
       .then((data) => {
         if (selectedOpt === "male") {
@@ -42,7 +42,7 @@ const Collections = () => {
       });
   }, [selectedOpt]);
   useEffect(() => {
-    fetch("https://dnh-fashion-server.vercel.app/category/womens")
+    fetch(`${import.meta.env.VITE_API_URL}/category/womens`)
       .then((res) => res.json())
       .then((data) => {
         if (selectedOpt === "female") {
@@ -51,7 +51,7 @@ const Collections = () => {
       });
   }, [selectedOpt]);
   useEffect(() => {
-    fetch("https://dnh-fashion-server.vercel.app/category/childrens")
+    fetch(`${import.meta.env.VITE_API_URL}/category/childrens`)
       .then((res) => res.json())
       .then((data) => {
         if (selectedOpt === "children") {
@@ -61,7 +61,7 @@ const Collections = () => {
   }, [selectedOpt]);
 
   useEffect(() => {
-    fetch("https://dnh-fashion-server.vercel.app/rating/4.5")
+    fetch(`${import.meta.env.VITE_API_URL}/rating/4.5`)
       .then((res) => res.json())
       .then((data) => {
         if (selectedOpt === "fourAndHalf") {
@@ -70,7 +70,7 @@ const Collections = () => {
       });
   }, [selectedOpt]);
   useEffect(() => {
-    fetch("https://dnh-fashion-server.vercel.app/rating/4")
+    fetch(`${import.meta.env.VITE_API_URL}/rating/4`)
       .then((res) => res.json())
       .then((data) => {
         if (selectedOpt === "four") {
@@ -79,7 +79,7 @@ const Collections = () => {
       });
   }, [selectedOpt]);
   useEffect(() => {
-    fetch("https://dnh-fashion-server.vercel.app/rating/3.5")
+    fetch(`${import.meta.env.VITE_API_URL}/rating/3.5`)
       .then((res) => res.json())
       .then((data) => {
         if (selectedOpt === "threeAndHalf") {
