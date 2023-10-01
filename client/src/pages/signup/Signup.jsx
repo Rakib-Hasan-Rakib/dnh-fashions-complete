@@ -5,7 +5,9 @@ import toast from "react-hot-toast";
 import { useLocation, useNavigate } from "react-router-dom";
 import { saveUser } from "../../utils/auth";
 import useAuth from "../../hooks/useAuth";
-import axios from "axios";
+import { ImSpinner4 } from "react-icons/im";
+import { FcGoogle } from "react-icons/fc";
+// import axios from "axios";
 
 const Signup = () => {
   const {
@@ -14,7 +16,7 @@ const Signup = () => {
     watch,
     formState: { errors },
   } = useForm();
-  const { createUser, updateUserProfile, setLoading } = useAuth();
+  const { createUser, updateUserProfile, setLoading, loading,signInWithGoogle } = useAuth();
 
   const location = useLocation();
   const from = location.state?.from?.pathName || "/";
@@ -29,7 +31,6 @@ const Signup = () => {
     const url = `https://api.imgbb.com/1/upload?key=${
       import.meta.env.VITE_IMGBB_KEY
     }`;
-    // axios.post(url, { formData: formData }).then((data) => console.log(data));
     fetch(url, {
       method: "POST",
       body: formData,
@@ -64,19 +65,35 @@ const Signup = () => {
     console.log(data);
   };
   //   console.log(watch("example"));
+   const handleGoogleSignIn = () => {
+     signInWithGoogle()
+       .then((result) => {
+         saveUser(result.user);
+         navigate(from, { replace: true });
+       })
+       .catch((err) => {
+         setLoading(false);
+         toast.error(err.message);
+       });
+  };
+  
+
   return (
     <>
       <Helmet>
         <title>D&H Fashions Ltd. | Sign up</title>
       </Helmet>
-      <div className="hero min-h-screen bg-base-200">
-        <div className="hero-content flex-col lg:flex-row-reverse">
-          <div className="text-center lg:text-left">
+      <div className="hero min-h-screen bg-base-200 w-[100vw]">
+        <div className="hero-content flex-col lg:flex-row-reverse justify-between">
+          <div className="text-center basis-1/2 lg:text-left">
             <SignupAnim />
           </div>
-          <div className="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
+          <div className="card flex-shrink-0 basis-1/2 w-full shadow-2xl bg-base-100">
+            <h1 className="text-2xl md:text-3xl lg:text-4xl 2xl:text-5xl">
+              Please Signup Here
+            </h1>
             <form onSubmit={handleSubmit(onSubmit)}>
-              <div className="card-body">
+              <div className="card-body w-full">
                 <div className="form-control">
                   <label className="label">
                     <span className="label-text">Name</span>
@@ -122,10 +139,18 @@ const Signup = () => {
                   />
                 </div>
                 <div className="form-control mt-6">
-                  <button className="btn btn-primary">Login</button>
+                  {loading ? (
+                    <ImSpinner4 />
+                  ) : (
+                    <button className="btn btn-primary">Login</button>
+                  )}
                 </div>
               </div>
             </form>
+            <div>
+              <p>or sign in with</p>
+              <FcGoogle onClick={handleGoogleSignIn} size={60} />
+            </div>
           </div>
         </div>
       </div>

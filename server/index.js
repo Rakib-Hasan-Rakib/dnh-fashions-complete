@@ -13,7 +13,7 @@ app.use(express.json())
 
 
 
-const { MongoClient, ServerApiVersion } = require('mongodb');
+const { MongoClient, ServerApiVersion, ObjectId } = require('mongodb');
 const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0.umvg5wn.mongodb.net/?retryWrites=true&w=majority`;
 
 // Create a MongoClient with a MongoClientOptions object to set the Stable API version
@@ -33,7 +33,8 @@ async function run() {
 
         const dressCollection = client.db('dnhFashionsDB').collection('dresses')
         const usersCollection = client.db('dnhFashionsDB').collection('users')
-        
+        const cartCollection = client.db('dnhFashionsDB').collection('carts')
+
 
         app.post('/jwt', (req, res) => {
             const user = req.body
@@ -158,10 +159,51 @@ async function run() {
             res.send(result)
         })
 
+        // add to cart
+        app.post('/cart', async (req, res) => {
+            const cartResult = await cartCollection.find().toArray()
+            console.log(req.body);
 
+            if (cartResult.length == 0) {
+                const result = await cartCollection.insertOne(req.body)
+                res.send(result)
+                return
+            } else {
+                for (item of cartResult) {
+                    if (item.id === req.body.id) {
+                        res.send({ message: 'this item is already added' })
+                        return
 
+                    } else {
+                        const result = await cartCollection.insertOne(req.body)
+                        res.send(result)
+                    }
+                }
+            }
+        })
+        // get cart item 
+        app.get('/cart/:email', async (req, res) => {
+            const email = req.params.email
+            const query = { email: email }
+            const result = await cartCollection.find(query).toArray()
+            res.send(result)
+        })
 
+        app.get('/cart/cartList', async (req, res) => {
+            const cartResult = await cartCollection.find().toArray()
+            const dressResult = await dressCollection.find().toArray()
+            for (item of cartResult) {
+                if (item.id === _id) { }
+            }
+            console.log(cartResult);
+        })
 
+        app.delete('/deletItem/:id', async (req, res) => {
+            const id = req.params.id
+            const query = { _id: new ObjectId(id) }
+            const result = await cartCollection.deleteOne(query)
+            res.send(result)
+        })
 
 
 

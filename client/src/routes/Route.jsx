@@ -7,6 +7,8 @@ import Disclaimer from "../pages/Disclaimer/Disclaimer";
 import Contact from "../pages/Contact/Contact";
 import Signin from "../pages/signin/Signin";
 import Signup from "../pages/signup/Signup";
+import PrivateRoute from "./PrivateRoute";
+import Cart from "../pages/cart/Cart";
 
 const Route = createBrowserRouter([
   {
@@ -18,6 +20,14 @@ const Route = createBrowserRouter([
       { path: "/collections", element: <Collections /> },
       { path: "/contact", element: <Contact /> },
       { path: "/disclaimer", element: <Disclaimer /> },
+      {
+        path: "/cart",
+        element: (
+          <PrivateRoute>
+            <Cart />
+          </PrivateRoute>
+        ),
+      },
     ],
   },
   { path: "/signin", element: <Signin /> },

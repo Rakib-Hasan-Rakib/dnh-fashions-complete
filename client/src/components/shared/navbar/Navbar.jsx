@@ -1,11 +1,12 @@
-import  { useState } from "react";
 import { Link, NavLink } from "react-router-dom";
 import Container from "../Container";
-import { AiOutlineMenu, AiOutlineShoppingCart } from "react-icons/ai";
+import { AiOutlineMenu} from "react-icons/ai";
 import Avatar from "./Avatar";
+import useAuth from "../../../hooks/useAuth";
+import CartIcon from "./CartIcon";
 
 const Navbar = () => {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const { logOut } = useAuth();
   const MenuItem = (
     <>
       <li>
@@ -48,6 +49,9 @@ const Navbar = () => {
           Disclaimer
         </NavLink>
       </li>
+      <li>
+        <NavLink onClick={()=> logOut()}>Logout</NavLink>
+      </li>
     </>
   );
   return (
@@ -55,7 +59,7 @@ const Navbar = () => {
       <div className="navbar bg-gray-900">
         <div className="navbar-start">
           <div className="dropdown">
-            <label tabIndex={0} className="lg:hidden">
+            <label tabIndex={0} className="z-10 lg:hidden">
               <AiOutlineMenu size={24} className="text-white" />
             </label>
             <ul
@@ -79,9 +83,8 @@ const Navbar = () => {
           <ul className="menu menu-horizontal px-1">{MenuItem}</ul>
         </div>
         <div className="navbar-end flex items-center gap-3">
-          <Link to="/" className="indicator">
-            <span className="indicator-item badge badge-secondary">0</span>
-            <AiOutlineShoppingCart size={24} className="text-white"/>
+          <Link to="/cart">
+            <CartIcon/>
           </Link>
           <Avatar />
         </div>

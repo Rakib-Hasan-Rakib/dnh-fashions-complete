@@ -1,8 +1,27 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Rating } from "@smastrom/react-rating";
+import useAuth from "../../hooks/useAuth";
+import useCart from "../../hooks/useCart";
+import toast from "react-hot-toast";
 
 const SingleCollection = ({ singleDress }) => {
-  const { image, name, rating } = singleDress;
+  const { _id, image, name, price, rating } = singleDress;
+  const { user } = useAuth();
+  const { addToCart, refetch, deleteFromCart } = useCart();
+  const navigate = useNavigate();
+
+  const handleCart = () => {
+    if (user) {
+      addToCart(user?.email, _id, image, price, name);
+      refetch();
+    } else {
+      toast.error("You need to sign in to add items in cart");
+      navigate("/signin", { replace: true });
+    }
+  };
+  const handleDelete = () => {
+    deleteFromCart();
+  };
 
   return (
     <div
@@ -28,9 +47,13 @@ const SingleCollection = ({ singleDress }) => {
           Rating : <span className="font-bold">{rating}</span>
         </p>
         <div className="flex mt-auto justify-center">
-          <Link to="/contact">
+          {/* <Link to="/contact">
             <button className="btn-two">contact for details</button>
-          </Link>
+          </Link> */}
+          <button onClick={handleCart} className={`btn-two`}>
+            Add to cart
+          </button>
+          <button onClick={handleDelete}>delete</button>
         </div>
       </div>
     </div>
