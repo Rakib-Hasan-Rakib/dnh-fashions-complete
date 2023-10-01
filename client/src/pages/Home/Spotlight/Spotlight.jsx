@@ -18,7 +18,7 @@ const Spotlight = () => {
   return (
     <div>
       {SectionTitle("style Spotlight", "the latest fashion statements")}
-      <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 lg:gap-8">
+      <div className="grid md:grid-cols-3 lg:grid-cols-4 gap-2 md:gap-4 lg:gap-6">
         {showMore &&
           spotlightDress.map((singleDress, i) => {
             return (
@@ -30,7 +30,7 @@ const Spotlight = () => {
               >
                 <figure>
                   <img
-                    className="h-[400px] w-full object-cover object-top"
+                    className="h-[300px] w-full object-cover object-top"
                     src={singleDress.image}
                     alt="Shoes"
                   />
@@ -49,7 +49,7 @@ const Spotlight = () => {
             );
           })}
         {showMore ||
-          spotlightDress.slice(0, 3).map((singleDress, i) => {
+          spotlightDress.slice(0, 4).map((singleDress, i) => {
             return (
               <div
                 data-aos="fade-up"
@@ -59,7 +59,7 @@ const Spotlight = () => {
               >
                 <figure>
                   <img
-                    className="h-[400px] w-full object-cover object-top"
+                    className="h-[300px] w-full object-cover object-top"
                     src={singleDress.image}
                     alt="Shoes"
                   />
@@ -91,7 +91,7 @@ const Spotlight = () => {
           onClick={() => setShowMore(true)}
           className="flex justify-center my-2 md:my-6"
         >
-          <button className="btn-two">browse collection</button>
+          <button className="btn-two">show more</button>
         </div>
       )}
     </div>

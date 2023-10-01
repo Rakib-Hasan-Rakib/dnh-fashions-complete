@@ -9,6 +9,7 @@ import Signin from "../pages/signin/Signin";
 import Signup from "../pages/signup/Signup";
 import PrivateRoute from "./PrivateRoute";
 import Cart from "../pages/cart/Cart";
+import DashLayout from "../layout/DashLayout";
 
 const Route = createBrowserRouter([
   {
@@ -32,6 +33,20 @@ const Route = createBrowserRouter([
   },
   { path: "/signin", element: <Signin /> },
   { path: "/signup", element: <Signup /> },
+  {
+    path: "dashboard",
+    element: <DashLayout />,
+    children: [
+      {
+        path: "/dashboard",
+        element: (
+          <PrivateRoute>
+            <Cart />
+          </PrivateRoute>
+        ),
+      },
+    ],
+  },
 ]);
 
 export default Route;

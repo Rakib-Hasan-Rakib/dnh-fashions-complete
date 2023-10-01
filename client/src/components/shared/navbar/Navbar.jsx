@@ -1,12 +1,14 @@
 import { Link, NavLink } from "react-router-dom";
 import Container from "../Container";
-import { AiOutlineMenu} from "react-icons/ai";
+import { AiOutlineMenu } from "react-icons/ai";
 import Avatar from "./Avatar";
 import useAuth from "../../../hooks/useAuth";
 import CartIcon from "./CartIcon";
+import { useState } from "react";
 
 const Navbar = () => {
-  const { logOut } = useAuth();
+  const { user, logOut } = useAuth();
+  const [viewAuthOpt, setViewAuthOpt] = useState(false);
   const MenuItem = (
     <>
       <li>
@@ -49,9 +51,6 @@ const Navbar = () => {
           Disclaimer
         </NavLink>
       </li>
-      <li>
-        <NavLink onClick={()=> logOut()}>Logout</NavLink>
-      </li>
     </>
   );
   return (
@@ -84,9 +83,43 @@ const Navbar = () => {
         </div>
         <div className="navbar-end flex items-center gap-3">
           <Link to="/cart">
-            <CartIcon/>
+            <CartIcon />
           </Link>
-          <Avatar />
+          <div
+            onClick={() => setViewAuthOpt(!viewAuthOpt)}
+            className="cursor-pointer"
+          >
+            <Avatar />
+          </div>
+          {viewAuthOpt && user && (
+            <div className="bg-white flex flex-col absolute top-16 z-10 w-24 md:w-32 rounded-md space-y-1 md:space-y-2 lg:space-y-3">
+              <Link to="/dashboard" className="px-2 md:px-4 py-1 hover:text-yellow-500">
+                Dashboard
+              </Link>
+              <Link
+                onClick={() => logOut()}
+                className="px-2 md:px-4 py-1 hover:text-yellow-500"
+              >
+                Logout
+              </Link>
+            </div>
+          )}
+          {viewAuthOpt && !user && (
+            <div className="bg-white flex flex-col absolute top-16 z-10 w-24 md:w-32 rounded-md space-y-1 md:space-y-2 lg:space-y-3">
+              <Link
+                to="/signup"
+                className="px-2 md:px-4 py-1 hover:text-yellow-400"
+              >
+                Sign Up
+              </Link>
+              <Link
+                to="signin"
+                className="px-2 md:px-4 py-1 hover:text-yellow-400"
+              >
+                Sign In
+              </Link>
+            </div>
+          )}
         </div>
       </div>
     </Container>
