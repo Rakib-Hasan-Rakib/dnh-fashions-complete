@@ -34,6 +34,7 @@ async function run() {
         const dressCollection = client.db('dnhFashionsDB').collection('dresses')
         const usersCollection = client.db('dnhFashionsDB').collection('users')
         const cartCollection = client.db('dnhFashionsDB').collection('carts')
+        const favCollection = client.db('dnhFashionsDB').collection('favs')
 
 
         app.post('/jwt', (req, res) => {
@@ -159,26 +160,42 @@ async function run() {
             res.send(result)
         })
 
+        // add to fav
+        app.post('/fav', async (req, res) => {
+            const favData = req.body
+            const query = { email: favData.email, id: favData.id }
+            const existFav = await favCollection.findOne(query)
+            if (existFav) {
+                return res.send({ message: 'You already added this item to your favourite list' })
+            } else {
+                const result = await favCollection.insertOne(favData)
+                res.send(result)
+            }
+
+        })
+        // get from fav
+        app.get('/fav/:email', async (req, res) => {
+            const query = { email: req.params.email }
+            const result = await favCollection.find(query).toArray()
+            res.send(result)
+        })
+        // remove from fav
+        app.delete('/fav/:id', async (req, res) => {
+            const id = req.params.id
+            const result = await favCollection.deleteOne({ _id: new ObjectId(id) })
+            res.send(result)
+        })
+
         // add to cart
         app.post('/cart', async (req, res) => {
-            const cartResult = await cartCollection.find().toArray()
-            console.log(req.body);
-
-            if (cartResult.length == 0) {
-                const result = await cartCollection.insertOne(req.body)
-                res.send(result)
-                return
+            const cartData = req.body
+            const query = { email: cartData.email, id: cartData.id }
+            const existCart = await cartCollection.findOne(query)
+            if (existCart) {
+                return res.send({ message: 'This item is already exist' })
             } else {
-                for (item of cartResult) {
-                    if (item.id === req.body.id) {
-                        res.send({ message: 'this item is already added' })
-                        return
-
-                    } else {
-                        const result = await cartCollection.insertOne(req.body)
-                        res.send(result)
-                    }
-                }
+                const result = await cartCollection.insertOne(cartData)
+                res.send(result)
             }
         })
         // get cart item 
@@ -188,16 +205,7 @@ async function run() {
             const result = await cartCollection.find(query).toArray()
             res.send(result)
         })
-
-        app.get('/cart/cartList', async (req, res) => {
-            const cartResult = await cartCollection.find().toArray()
-            const dressResult = await dressCollection.find().toArray()
-            for (item of cartResult) {
-                if (item.id === _id) { }
-            }
-            console.log(cartResult);
-        })
-
+        // delete product from cart
         app.delete('/deletItem/:id', async (req, res) => {
             const id = req.params.id
             const query = { _id: new ObjectId(id) }

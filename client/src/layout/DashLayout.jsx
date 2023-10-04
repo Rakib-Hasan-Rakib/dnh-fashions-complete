@@ -1,5 +1,5 @@
-import React from "react";
-import { NavLink, Outlet } from "react-router-dom";
+import { Link, NavLink, Outlet } from "react-router-dom";
+import Container from "../components/shared/Container";
 
 const DashLayout = () => {
   return (
@@ -13,7 +13,9 @@ const DashLayout = () => {
         >
           Open drawer
         </label>
-        <Outlet />
+        <Container>
+          <Outlet />
+        </Container>
       </div>
       <div className="drawer-side">
         <label
@@ -28,19 +30,35 @@ const DashLayout = () => {
               to="/dashboard"
               className={({ isActive }) => (isActive ? "active" : "default")}
             >
-              Cart Product
+              Cart
             </NavLink>
           </li>
           <li>
-            <a>Favourite Product</a>
+            <NavLink
+              to="/dashboard/favproduct"
+              className={({ isActive }) => (isActive ? "active" : "default")}
+            >
+              Favourite
+            </NavLink>
           </li>
           <li>
-            <a>Purchased Product</a>
+            <NavLink
+              to="/dashboard"
+              className={({ isActive }) => (isActive ? "active" : "default")}
+            >
+              Purchased
+            </NavLink>
+            <NavLink
+              to="/dashboard/addproduct"
+              className={({ isActive }) => (isActive ? "active" : "default")}
+            >
+              Add Product
+            </NavLink>
           </li>
-          <div className="mt-auto p-2 ">
+          <div className="mt-auto p-2 flex flex-col">
             <hr />
-            <li>Home</li>
-            <li>Collection</li>
+            <Link to="/">Home</Link>
+            <Link to="/collections">Collections</Link>
           </div>
         </ul>
       </div>

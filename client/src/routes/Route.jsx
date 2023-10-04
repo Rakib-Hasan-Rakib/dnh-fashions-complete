@@ -10,6 +10,8 @@ import Signup from "../pages/signup/Signup";
 import PrivateRoute from "./PrivateRoute";
 import Cart from "../pages/cart/Cart";
 import DashLayout from "../layout/DashLayout";
+import AddProduct from "../pages/dashboard/adminDash/addproduct/AddProduct";
+import Favourite from "../pages/dashboard/userDash/Favourite";
 
 const Route = createBrowserRouter([
   {
@@ -42,6 +44,22 @@ const Route = createBrowserRouter([
         element: (
           <PrivateRoute>
             <Cart />
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "/dashboard/favproduct",
+        element: (
+          <PrivateRoute>
+            <Favourite />
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "/dashboard/addproduct",
+        element: (
+          <PrivateRoute>
+            <AddProduct />
           </PrivateRoute>
         ),
       },

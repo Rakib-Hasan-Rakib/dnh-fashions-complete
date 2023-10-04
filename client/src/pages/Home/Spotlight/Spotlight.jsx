@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import AOS from "aos";
 import "aos/dist/aos.css";
 import SectionTitle from "../../../components/shared/sectionTitle/SectionTitle";
+import Card from "../../../components/shared/card/Card";
 AOS.init();
 
 const Spotlight = () => {
@@ -22,58 +23,16 @@ const Spotlight = () => {
         {showMore &&
           spotlightDress.map((singleDress, i) => {
             return (
-              <div
-                data-aos="fade-up"
-                data-aos-duration="1500"
-                key={i}
-                className="card w-full shadow-xl border border-red-600"
-              >
-                <figure>
-                  <img
-                    className="h-[300px] w-full object-cover object-top"
-                    src={singleDress.image}
-                    alt="Shoes"
-                  />
-                </figure>
-                <div className="card-body text-center">
-                  <h2 className="text-lg md:text-2xl capitalize font-bold md:py-4">
-                    {singleDress.name}
-                  </h2>
-                  <div className="card-actions justify-center">
-                    <Link to="/collections">
-                      <button className="btn-two">browse collection</button>
-                    </Link>
-                  </div>
-                </div>
+              <div data-aos="fade-up" data-aos-duration="1500" key={i}>
+                <Card productInfo={singleDress} />
               </div>
             );
           })}
         {showMore ||
           spotlightDress.slice(0, 4).map((singleDress, i) => {
             return (
-              <div
-                data-aos="fade-up"
-                data-aos-duration="1500"
-                key={i}
-                className="card w-full shadow-xl border border-red-600"
-              >
-                <figure>
-                  <img
-                    className="h-[300px] w-full object-cover object-top"
-                    src={singleDress.image}
-                    alt="Shoes"
-                  />
-                </figure>
-                <div className="card-body text-center">
-                  <h2 className="text-lg md:text-2xl capitalize font-bold md:py-4">
-                    {singleDress.name}
-                  </h2>
-                  <div className="card-actions justify-center">
-                    <Link to="/collections">
-                      <button className="btn-two">browse collection</button>
-                    </Link>
-                  </div>
-                </div>
+              <div data-aos="fade-up" data-aos-duration="1500" key={i}>
+                <Card productInfo={singleDress} />
               </div>
             );
           })}

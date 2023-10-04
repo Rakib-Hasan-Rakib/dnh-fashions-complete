@@ -2,7 +2,7 @@ import { useState } from "react";
 import { ImCancelCircle } from "react-icons/im";
 import useCart from "../../hooks/useCart";
 
-const ProductList = ({ product }) => {
+const ProductList = ({ product, setTotal }) => {
   const [quantity, setQuantity] = useState(1);
   const { deleteFromCart, refetch } = useCart();
   const { _id, name, image, price } = product;
@@ -35,7 +35,17 @@ const ProductList = ({ product }) => {
       </td>
       <td>${price}</td>
       <td className="flex justify-center items-center gap-2">
-        <button onClick={() => setQuantity((preValue) => preValue - 1)}>
+        <button
+          onClick={() =>
+            setQuantity((preValue) => {
+              if (preValue > 0) {
+                preValue - 1;
+              } else {
+                preValue
+              }
+            })
+          }
+        >
           -
         </button>
         <p>{quantity}</p>
@@ -44,7 +54,7 @@ const ProductList = ({ product }) => {
           +
         </button>
       </td>
-      <th>${total}</th>
+      <th onChange={() => setTotal(total)}>${total}</th>
     </tr>
   );
 };

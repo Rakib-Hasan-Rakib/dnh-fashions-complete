@@ -7,7 +7,7 @@ import toast from "react-hot-toast";
 const SingleCollection = ({ singleDress }) => {
   const { _id, image, name, price, rating } = singleDress;
   const { user } = useAuth();
-  const { addToCart, refetch, deleteFromCart } = useCart();
+  const { addToCart, refetch } = useCart();
   const navigate = useNavigate();
 
   const handleCart = () => {
@@ -18,9 +18,6 @@ const SingleCollection = ({ singleDress }) => {
       toast.error("You need to sign in to add items in cart");
       navigate("/signin", { replace: true });
     }
-  };
-  const handleDelete = () => {
-    deleteFromCart();
   };
 
   return (
@@ -53,7 +50,6 @@ const SingleCollection = ({ singleDress }) => {
           <button onClick={handleCart} className={`btn-two`}>
             Add to cart
           </button>
-          <button onClick={handleDelete}>delete</button>
         </div>
       </div>
     </div>
