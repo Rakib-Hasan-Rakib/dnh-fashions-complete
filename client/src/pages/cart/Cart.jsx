@@ -7,8 +7,12 @@ import { useState } from "react";
 const Cart = () => {
   const { cartItems } = useCart();
   const { loading } = useAuth();
-  const [total, setTotal] = useState(0)
+  const [total, setTotal] = useState(0);
+  const [priceArray,setPriceArray]=useState([])
+  const arr = [];
+
   console.log(total);
+
   return (
     <div className="flex flex-col lg:flex-row justify-between items-start gap-4">
       <div className="lg:basis-2/3">
@@ -27,14 +31,23 @@ const Cart = () => {
               {/* row 1 */}
               {!loading &&
                 cartItems?.map((item) => {
-                  return <ProductList key={item._id} product={item} setTotal={setTotal} />;
+                  return (
+                    <ProductList
+                      key={item._id}
+                      product={item}
+                      setTotal={setTotal}
+                      arr={arr}
+                      setPriceArray={setPriceArray}
+                    />
+                  );
                 })}
+              {/* {console.log(total)} */}
             </tbody>
           </table>
         </div>
       </div>
       <div className="lg:basis-1/3">
-        <CheckoutForm />
+        <CheckoutForm total={total} />
       </div>
     </div>
   );

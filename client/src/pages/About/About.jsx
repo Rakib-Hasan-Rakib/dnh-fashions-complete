@@ -10,7 +10,6 @@ import ActAnim from "../../components/shared/animations/ActAnim";
 import MissionAnim from "../../components/shared/animations/MissionAnim";
 import StrategyAnim from "../../components/shared/animations/StrategyAnim";
 import ManagementAnim from "../../components/shared/animations/ManagementAnim";
-import Container from "../../components/shared/Container";
 
 const About = () => {
   return (
@@ -18,7 +17,6 @@ const About = () => {
       <Helmet>
         <title>D&H Fashions Ltd. | About</title>
       </Helmet>
-      <Container>
         <div>
           {DivTitle("Welcome to D&H Fashions", "Embracing New Beginnings")}
           <div className="flex flex-col-reverse lg:flex-row gap-4 justify-center items-center">
@@ -331,7 +329,6 @@ const About = () => {
             </div>
           </div>
         </div>
-      </Container>
     </div>
   );
 };

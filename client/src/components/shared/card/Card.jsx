@@ -1,69 +1,116 @@
-import { Rating } from "@smastrom/react-rating";
-import { AiOutlineHeart, AiFillHeart } from "react-icons/ai";
-import { addFav, getFav } from "../../../utils/fav";
+import { AiOutlineHeart, AiFillHeart, AiOutlineStar } from "react-icons/ai";
+import { addFav } from "../../../utils/fav";
 import useAuth from "../../../hooks/useAuth";
 import { useState } from "react";
+import { Link, useLocation } from "react-router-dom";
+import Fav from "../fav/Fav";
+import useCart from "../../../hooks/useCart";
+import Modal from "react-modal";
+import DetailsModal from "../modal/DetailsModal";
+
+const customStyles = {
+  content: {
+    top: "50%",
+    left: "50%",
+    right: "auto",
+    bottom: "auto",
+    marginRight: "-50%",
+    transform: "translate(-50%, -50%)",
+  },
+};
 
 const Card = ({ productInfo }) => {
   const { image, name, price, rating, _id } = productInfo;
   const [fav, setFav] = useState(false);
   const { user } = useAuth();
-  const handleCart = () => {};
+  const { addToCart } = useCart();
+  const [modalIsOpen, setIsOpen] = useState(false);
+
   const handleFav = () => {
     addFav(user?.email, _id, name, price, image);
     setFav(true);
   };
-  const handleGet = () => {
-    getFav(user?.email);
+
+  const openModal = () => {
+    setIsOpen(true);
   };
+  if (modalIsOpen) {
+    document.body.style.overflow = "hidden";
+  } else {
+    document.body.style.overflow = "unset";
+  }
   return (
-    <div className="card w-full shadow-xl relative">
-      <figure>
-        <img
-          className="h-[300px] w-full object-cover object-top"
-          src={image}
-          alt="Shoes"
-        />
-      </figure>
-      <h2 className="text-lg md:text-2xl text-center capitalize font-bold md:py-2">
-        {name}
-      </h2>
-      <p>
-        Lorem ipsum dolor sit amet consectetur, adipisicing elit.{" "}
-        <span className="text-blue-500 hover:border-b hover:border-blue-500 cursor-pointer">
-          <small>show more</small>
-        </span>
-      </p>
-      <Rating
-        className="text-yellow-500 bg-yellow-500"
-        style={{ maxWidth: 15 }}
-        value={rating}
-        readOnly
+    <div className="card relative flex w-full h-[450px] shadow-lg">
+      <img
+        className="rounded-lg h-[250px] w-full object-cover object-top"
+        src={image}
+        alt="Shoes"
       />
-      <p className="text-lg">
-        Rating : <span className="font-bold">{rating}</span>
-      </p>
-      <div className="flex mt-auto justify-center">
-        {/* <Link to="/contact">
-            <button className="btn-two">contact for details</button>
-          </Link> */}
-        <button onClick={handleCart} className={`btn-two`}>
-          Add to cart
-        </button>
-        <button onClick={handleGet}>Get</button>
+      <div className="px-3">
+        <h2 className="text-lg md:text-2xl text-center capitalize font-bold md:py-2">
+          {name}
+        </h2>
+        <div className="flex justify-between items-center">
+          <p className="font-semibold text-lg">${price}</p>
+          <div className="flex justify-center gap-1 items-center">
+            <AiOutlineStar size={24} />
+            <p className="font-semibold text-lg">{rating}</p>
+          </div>
+        </div>
+        <div className="flex justify-between gap-4 items-center absolute bottom-4">
+          <button onClick={openModal} className="btn-three">
+            View Details
+          </button>
+          <button
+            onClick={() => addToCart(user?.email, _id, image, price, name)}
+            className={`btn-four`}
+          >
+            Add to cart
+          </button>
+        </div>
+        {/* <div onClick={handleFav} className="cursor-pointer">
+          {fav ? (
+            <AiFillHeart
+              size={36}
+              className="text-red-500 absolute top-2 right-2 bg-black bg-opacity-40 p-2 rounded-full"
+            />
+          ) : (
+            <AiOutlineHeart
+              size={36}
+              className="text-red-500 absolute top-2 right-2 bg-black bg-opacity-40 p-2 rounded-full"
+            />
+          )}
+        </div> */}
+        <div className="absolute top-2 right-2">
+          <Fav product={productInfo} />
+        </div>
       </div>
-      <div onClick={handleFav}>
-        {fav ? (
-          <AiFillHeart
-            size={24}
-            className="text-red-500 absolute top-2 right-2"
-          />
-        ) : (
-          <AiOutlineHeart
-            size={24}
-            className="text-red-500 absolute top-2 right-2"
-          />
-        )}
+      <div>
+        {/* <button onClick={openModal}>Open Modal</button> */}
+        {/* <Modal
+          isOpen={modalIsOpen}
+          ariaHideApp={false}
+          onRequestClose={closeModal}
+          style={customStyles}
+          contentLabel="Example Modal"
+        >
+          <h2>Hello</h2>
+          <button onClick={closeModal}>close</button>
+          <div>I am a modal</div>
+          <form>
+            <input />
+            <button>tab navigation</button>
+            <button>stays</button>
+            <button>inside</button>
+            <button>the modal</button>
+          </form>
+        </Modal> */}
+        <DetailsModal
+          modalIsOpen={modalIsOpen}
+          setIsOpen={setIsOpen}
+          id={_id}
+          customStyles={customStyles}
+        />
       </div>
     </div>
   );

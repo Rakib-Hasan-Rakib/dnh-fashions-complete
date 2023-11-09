@@ -12,6 +12,8 @@ import Cart from "../pages/cart/Cart";
 import DashLayout from "../layout/DashLayout";
 import AddProduct from "../pages/dashboard/adminDash/addproduct/AddProduct";
 import Favourite from "../pages/dashboard/userDash/Favourite";
+import Details from "../pages/details/Details";
+// import { getSingleProduct } from "../utils/product";
 
 const Route = createBrowserRouter([
   {
@@ -19,6 +21,10 @@ const Route = createBrowserRouter([
     element: <MainLayout />,
     children: [
       { path: "/", element: <Home /> },
+      {
+        path: "/allDress/:id",
+        element: <Details />,
+      },
       { path: "/about", element: <About /> },
       { path: "/collections", element: <Collections /> },
       { path: "/contact", element: <Contact /> },

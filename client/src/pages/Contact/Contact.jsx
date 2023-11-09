@@ -7,15 +7,12 @@ import {HiOutlineMailOpen} from 'react-icons/hi'
 // import Map from "../../Components/Map/Map";
 import { Helmet } from "react-helmet";
 import SectionTitle from "../../components/shared/sectionTitle/SectionTitle";
-import Container from "../../components/shared/Container";
-
 const Contact = () => {
   return (
     <>
       <Helmet>
         <title>D&H Fashions Ltd. | Contact</title>
       </Helmet>
-      <Container>
         {SectionTitle("contact us", "get in touch")}
         <div className="contact-container flex flex-col lg:flex-row justify-between gap-20 lg:gap-10">
           <div className="bg-transparent backdrop-blur-3xl basis-1/2 space-y-3 md:space-y-6">
@@ -73,7 +70,6 @@ const Contact = () => {
             </div>
           </div>
         </div>
-      </Container>
       <div className="my-8 md:my-12 lg:my-16">
         {/* <Map /> */}
       </div>

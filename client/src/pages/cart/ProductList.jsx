@@ -1,17 +1,28 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { ImCancelCircle } from "react-icons/im";
 import useCart from "../../hooks/useCart";
 
-const ProductList = ({ product, setTotal }) => {
+const ProductList = ({ product, setTotal, arr, setPriceArray }) => {
   const [quantity, setQuantity] = useState(1);
   const { deleteFromCart, refetch } = useCart();
   const { _id, name, image, price } = product;
-  const total = (price * quantity).toFixed(2);
+  let total = 0
 
   const handleDelete = () => {
     deleteFromCart(_id);
     refetch();
   };
+  useEffect(() => {
+    setTotal(total);
+  }, []);
+  const handleIncrease = () => {
+    setQuantity((preValue) => preValue + 1);
+    total = (price * quantity).toFixed(2);
+    setTotal(total);
+    // setPriceArray(arr.push(total));
+  };
+
+  // console.log(arr);
 
   return (
     <tr>
@@ -35,7 +46,7 @@ const ProductList = ({ product, setTotal }) => {
       </td>
       <td>${price}</td>
       <td className="flex justify-center items-center gap-2">
-        <button
+        {/* <button
           onClick={() =>
             setQuantity((preValue) => {
               if (preValue > 0) {
@@ -47,14 +58,12 @@ const ProductList = ({ product, setTotal }) => {
           }
         >
           -
-        </button>
+        </button> */}
         <p>{quantity}</p>
 
-        <button onClick={() => setQuantity((preValue) => preValue + 1)}>
-          +
-        </button>
+        <button onClick={handleIncrease}>+</button>
       </td>
-      <th onChange={() => setTotal(total)}>${total}</th>
+      <th>${total}</th>
     </tr>
   );
 };

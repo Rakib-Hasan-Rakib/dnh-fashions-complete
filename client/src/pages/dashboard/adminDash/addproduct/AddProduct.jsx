@@ -1,27 +1,28 @@
 
 const AddProduct = () => {
     return (
-      <form className="flex justify-between items-start gap-4">
+      <form className="flex justify-between gap-8 items-start bg-gray-300">
         <div className="basis-1/2 flex w-full">
           <div className="my-4">
+            <label htmlFor="">Upload front part of the dress</label>
             <input
               type="file"
-              className="bg-white border border-yellow-300 outline-none rounded-md w-full p-4"
+              className="border-2 border-dotted border-yellow-300 outline-none rounded-md w-full py-8 px-2"
             />
             <input
               type="file"
-              className="bg-white border border-yellow-300 outline-none rounded-md w-full p-4"
+              className="bg-white border border-yellow-300 outline-none rounded-md w-full py-8 px-2 m-2"
             />
           </div>
           <div className="my-4">
             <input
               type="file"
-              className="bg-white border border-yellow-300 outline-none rounded-md w-full p-4"
+              className="bg-white border border-yellow-300 outline-none rounded-md w-full py-8 px-2 m-2"
               placeholder="Browse file"
             />
             <input
               type="file"
-              className="bg-white border border-yellow-300 outline-none rounded-md w-full p-4"
+              className="bg-white border border-yellow-300 outline-none rounded-md w-full py-8 px-2 m-2"
             />
           </div>
         </div>
@@ -30,7 +31,7 @@ const AddProduct = () => {
             <label htmlFor="">Product Name</label>
             <input
               type="text"
-              className="bg-white border border-yellow-300 outline-none rounded-md w-full px-2 py-1"
+              className="bg-white border border-yellow-300 outline-none rounded-md w-full px-2 py-1 m-2"
               placeholder="Enter Product Name Here"
             />
           </div>

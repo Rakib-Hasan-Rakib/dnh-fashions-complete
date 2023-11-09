@@ -1,7 +1,5 @@
-import React from "react";
 import { Helmet } from "react-helmet";
 import SectionTitle from "../../components/shared/sectionTitle/SectionTitle";
-import Container from "../../components/shared/Container";
 
 const Disclaimer = () => {
   return (
@@ -9,7 +7,6 @@ const Disclaimer = () => {
       <Helmet>
         <title>D&H Fashions Ltd. | Disclaimer</title>
       </Helmet>
-      <Container>
         {SectionTitle("Disclaimer & policy", "Terms & Conditions")}
         <div className="space-y-2">
           <p className="basis-1/2">
@@ -123,7 +120,6 @@ const Disclaimer = () => {
             us by email to sales@dnhfashions.com.
           </p>
         </div>
-      </Container>
     </>
   );
 };

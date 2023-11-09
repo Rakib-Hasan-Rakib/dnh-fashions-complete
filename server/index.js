@@ -68,6 +68,12 @@ async function run() {
             const result = await dressCollection.find().toArray();
             res.send(result)
         })
+        app.get('/allDress/:id', async (req, res) => {
+            const id = req.params.id
+            const query = { _id: new ObjectId(id) }
+            const result = await dressCollection.findOne(query)
+            res.send(result)
+        })
 
         // get dress by category
         // get mens dress
@@ -88,39 +94,6 @@ async function run() {
             const result = await dressCollection.find(query).toArray()
             res.send(result)
         })
-
-        // get dress by ratings
-        app.get('/rating/4.5', async (req, res) => {
-            const preResult = await dressCollection.find().toArray();
-            const result = []
-            for (dressObject of preResult) {
-                if (dressObject.rating >= 4.5) {
-                    result.push(dressObject)
-                }
-            }
-            res.send(result)
-        })
-        app.get('/rating/4', async (req, res) => {
-            const preResult = await dressCollection.find().toArray();
-            const result = []
-            for (dressObject of preResult) {
-                if (dressObject.rating >= 4) {
-                    result.push(dressObject)
-                }
-            }
-            res.send(result)
-        })
-        app.get('/rating/3.5', async (req, res) => {
-            const preResult = await dressCollection.find().toArray();
-            const result = []
-            for (dressObject of preResult) {
-                if (dressObject.rating >= 3.5) {
-                    result.push(dressObject)
-                }
-            }
-            res.send(result)
-        })
-
 
         // get featured section dresses
         app.get('/featured', async (req, res) => {

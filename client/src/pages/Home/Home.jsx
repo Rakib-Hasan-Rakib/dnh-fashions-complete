@@ -4,7 +4,6 @@ import Spotlight from "./Spotlight/Spotlight";
 import Seasonal from "./Seasonal/Seasonal";
 import Latest from "./Latest/Latest";
 import { Helmet } from "react-helmet";
-import Container from "../../components/shared/Container";
 
 const Home = () => {
   return (
@@ -12,13 +11,11 @@ const Home = () => {
       <Helmet>
         <title>D&H Fashions Ltd. | Home</title>
       </Helmet>
-      <Container>
-        <Banner />
-        <Featured />
-        <Spotlight />
-        <Seasonal />
-        <Latest />
-      </Container>
+      <Banner />
+      <Featured />
+      <Spotlight />
+      <Seasonal />
+      <Latest />
     </div>
   );
 };

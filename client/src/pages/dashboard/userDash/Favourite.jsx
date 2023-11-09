@@ -2,16 +2,16 @@ import { useEffect, useState } from "react";
 import useAuth from "../../../hooks/useAuth";
 import axios from "axios";
 import toast from "react-hot-toast";
-// import { getFav } from "../../../utils/fav";
+import useCart from "../../../hooks/useCart";
 
 const Favourite = () => {
   const [favProduct, setFavProduct] = useState([]);
   const { loading, user } = useAuth();
+  const { refetch, addToCart } = useCart();
   useEffect(() => {
     fetch(`${import.meta.env.VITE_API_URL}/fav/${user?.email}`)
       .then((res) => res.json())
       .then((data) => setFavProduct(data));
-    // getFav(user?.email);
   }, [user]);
 
   const handleDeleteFav = (id) => {
@@ -27,12 +27,15 @@ const Favourite = () => {
       })
       .catch((err) => console.log(err));
   };
+  const handleCart = (id, image, price, name) => {
+    addToCart(user?.email, id, image, price, name);
+    refetch();
+  };
 
   return (
     <div>
       <div className="overflow-x-auto">
         <table className="table">
-          {/* head */}
           <thead>
             <tr>
               <th>Product</th>
@@ -42,7 +45,6 @@ const Favourite = () => {
             </tr>
           </thead>
           <tbody>
-            {/* row 1 */}
             {!loading &&
               favProduct?.map((item) => {
                 return (
@@ -65,7 +67,17 @@ const Favourite = () => {
                       >
                         Remove
                       </button>
-                      <button className="border border-yellow-500 bg-yellow-500 text-white hover:bg-transparent hover:text-black hover:duration-200 font-semibold px-4 py-1 rounded-sm">
+                      <button
+                        onClick={() =>
+                          handleCart(
+                            item._id,
+                            item.image,
+                            item.price,
+                            item.name
+                          )
+                        }
+                        className="border border-yellow-500 bg-yellow-500 text-white hover:bg-transparent hover:text-black hover:duration-200 font-semibold px-4 py-1 rounded-sm"
+                      >
                         Add to cart
                       </button>
                     </td>
