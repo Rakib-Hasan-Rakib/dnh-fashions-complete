@@ -8,10 +8,6 @@ const Cart = () => {
   const { cartItems } = useCart();
   const { loading } = useAuth();
   const [total, setTotal] = useState(0);
-  const [priceArray,setPriceArray]=useState([])
-  const arr = [];
-
-  console.log(total);
 
   return (
     <div className="flex flex-col lg:flex-row justify-between items-start gap-4">
@@ -36,8 +32,6 @@ const Cart = () => {
                       key={item._id}
                       product={item}
                       setTotal={setTotal}
-                      arr={arr}
-                      setPriceArray={setPriceArray}
                     />
                   );
                 })}

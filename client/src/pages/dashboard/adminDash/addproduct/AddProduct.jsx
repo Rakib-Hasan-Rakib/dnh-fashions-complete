@@ -1,29 +1,73 @@
+import { Helmet } from "react-helmet";
+import { useForm } from "react-hook-form";
 
 const AddProduct = () => {
-    return (
-      <form className="flex justify-between gap-8 items-start bg-gray-300">
+  const {
+    register,
+    handleSubmit,
+    watch,
+    formState: { errors },
+  } = useForm();
+
+  const onSubmit = (data) => {
+  
+}
+
+
+
+
+
+
+
+  return (
+    <>
+      <Helmet>
+        <title>D&H Fashions Ltd. | Add Product</title>
+      </Helmet>
+      <form
+        onSubmit={handleSubmit(onSubmit)}
+        className="flex justify-between gap-8 items-start bg-gray-300"
+      >
         <div className="basis-1/2 flex w-full">
           <div className="my-4">
-            <label htmlFor="">Upload front part of the dress</label>
-            <input
-              type="file"
-              className="border-2 border-dotted border-yellow-300 outline-none rounded-md w-full py-8 px-2"
-            />
-            <input
-              type="file"
-              className="bg-white border border-yellow-300 outline-none rounded-md w-full py-8 px-2 m-2"
-            />
+            <div>
+              <label htmlFor="">Upload front part of the dress</label>
+              <input
+                type="file"
+                {...register("photoFront")}
+                accept="image/*"
+                className="border-2 border-dotted border-yellow-300 outline-none rounded-md w-full py-8 px-2"
+              />
+            </div>
+            <div>
+              <label htmlFor="">Upload right part of the dress</label>
+              <input
+                type="file"
+                {...register("photoRight")}
+                accept="image/*"
+                className="border-2 border-dotted border-yellow-300 outline-none rounded-md w-full py-8 px-2"
+              />
+            </div>
           </div>
           <div className="my-4">
-            <input
-              type="file"
-              className="bg-white border border-yellow-300 outline-none rounded-md w-full py-8 px-2 m-2"
-              placeholder="Browse file"
-            />
-            <input
-              type="file"
-              className="bg-white border border-yellow-300 outline-none rounded-md w-full py-8 px-2 m-2"
-            />
+            <div>
+              <label htmlFor="">Upload back part of the dress</label>
+              <input
+                type="file"
+                {...register("photoBack")}
+                accept="image/*"
+                className="border-2 border-dotted border-yellow-300 outline-none rounded-md w-full py-8 px-2"
+              />
+            </div>
+            <div>
+              <label htmlFor="">Upload left part of the dress</label>
+              <input
+                type="file"
+                {...register("photoLeft")}
+                accept="image/*"
+                className="border-2 border-dotted border-yellow-300 outline-none rounded-md w-full py-8 px-2"
+              />
+            </div>
           </div>
         </div>
         <div className="basis-1/2">
@@ -31,13 +75,15 @@ const AddProduct = () => {
             <label htmlFor="">Product Name</label>
             <input
               type="text"
+              {...register("productName")}
+              placeholder="Write your product name here"
               className="bg-white border border-yellow-300 outline-none rounded-md w-full px-2 py-1 m-2"
-              placeholder="Enter Product Name Here"
             />
           </div>
           <div className="flex flex-col">
             <label htmlFor="">Category</label>
-            <select
+            <Select name="gender" options={["female", "male", "other"]} />
+            {/* <select
               name=""
               id=""
               className="bg-white border border-yellow-300 outline-none rounded-md w-full px-2 py-1"
@@ -46,7 +92,7 @@ const AddProduct = () => {
               <option value="">Women</option>
               <option value="">Children</option>
               <option value="">Sport</option>
-            </select>
+            </select> */}
           </div>
           <div>
             <label htmlFor="">Price</label>
@@ -70,7 +116,8 @@ const AddProduct = () => {
           </div>
         </div>
       </form>
-    );
+    </>
+  );
 };
 
 export default AddProduct;

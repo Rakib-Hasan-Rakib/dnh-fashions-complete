@@ -12,7 +12,6 @@ const DetailsModal = ({ modalIsOpen, setIsOpen, id, customStyles }) => {
       .get(`${import.meta.env.VITE_API_URL}/allDress/${id}`)
       .then((data) => {
         setProduct(data.data);
-        console.log(data.data);
       })
       .catch((err) => console.log(err));
   }, [id]);

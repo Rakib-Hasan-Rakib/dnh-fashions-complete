@@ -1,28 +1,32 @@
 import { useEffect, useState } from "react";
 import { ImCancelCircle } from "react-icons/im";
 import useCart from "../../hooks/useCart";
+import axios from "axios";
 
-const ProductList = ({ product, setTotal, arr, setPriceArray }) => {
-  const [quantity, setQuantity] = useState(1);
+const ProductList = ({ product, setTotal }) => {
   const { deleteFromCart, refetch } = useCart();
-  const { _id, name, image, price } = product;
-  let total = 0
+  const { _id, name, image, price, quantity } = product;
 
   const handleDelete = () => {
     deleteFromCart(_id);
     refetch();
   };
-  useEffect(() => {
-    setTotal(total);
-  }, []);
-  const handleIncrease = () => {
-    setQuantity((preValue) => preValue + 1);
-    total = (price * quantity).toFixed(2);
-    setTotal(total);
-    // setPriceArray(arr.push(total));
-  };
 
-  // console.log(arr);
+  // const handleQuantityChange = (id) => {
+  //   axios
+  //     .put(`${import.meta.env.VITE_API_URL}/cart/${id}`, {
+  //       quantity: uiQuantity,
+  //     })
+  //     .then((data) => console.log(data));
+  // };
+
+  const handlePlusBtn = (id) => {
+    axios
+      .put(`${import.meta.env.VITE_API_URL}/cart/${id}`, {
+        quantity: quantity + 1,
+      })
+      .then((data) => console.log(data));
+  };
 
   return (
     <tr>
@@ -46,24 +50,12 @@ const ProductList = ({ product, setTotal, arr, setPriceArray }) => {
       </td>
       <td>${price}</td>
       <td className="flex justify-center items-center gap-2">
-        {/* <button
-          onClick={() =>
-            setQuantity((preValue) => {
-              if (preValue > 0) {
-                preValue - 1;
-              } else {
-                preValue
-              }
-            })
-          }
-        >
-          -
-        </button> */}
-        <p>{quantity}</p>
 
-        <button onClick={handleIncrease}>+</button>
+        <p>{quantity}</p>
+        <button onClick={() => handlePlusBtn(_id)}>+</button>
+        
       </td>
-      <th>${total}</th>
+      <th>$</th>
     </tr>
   );
 };

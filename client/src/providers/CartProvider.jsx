@@ -18,6 +18,7 @@ const CartProvider = ({ children }) => {
         image,
         price,
         name,
+        quantity: 1,
       })
       .then((data) => {
         if (data.data.insertedId) {

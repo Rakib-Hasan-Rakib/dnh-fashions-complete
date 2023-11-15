@@ -62,7 +62,9 @@ const Card = ({ productInfo }) => {
             View Details
           </button>
           <button
-            onClick={() => addToCart(user?.email, _id, image, price, name)}
+            onClick={() =>
+              addToCart(user?.email, _id, image, price, name)
+            }
             className={`btn-four`}
           >
             Add to cart

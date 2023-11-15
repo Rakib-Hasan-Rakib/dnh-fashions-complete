@@ -36,6 +36,10 @@ async function run() {
         const cartCollection = client.db('dnhFashionsDB').collection('carts')
         const favCollection = client.db('dnhFashionsDB').collection('favs')
 
+        // const indexKey = { name: 1 }
+        // const indexOption = { name: 'title' }
+        // const indexResult = await dressCollection.createIndex(indexKey, indexOption)
+
 
         app.post('/jwt', (req, res) => {
             const user = req.body
@@ -72,6 +76,15 @@ async function run() {
             const id = req.params.id
             const query = { _id: new ObjectId(id) }
             const result = await dressCollection.findOne(query)
+            res.send(result)
+        })
+
+        // find dress by search
+        app.get('/dressSearch/:text', async (req, res) => {
+            const searchText = req.params.text
+            const result = await dressCollection.find(
+                { name: { $regex: searchText, $options: "i" } }
+            ).toArray()
             res.send(result)
         })
 
@@ -171,6 +184,22 @@ async function run() {
                 res.send(result)
             }
         })
+        // update quantity in cart
+        app.put('/cart/:id', async (req, res) => {
+            const id = req.params.id
+            const { quantity } = req.body
+            console.log(quantity);
+            const query = { _id: new ObjectId(id) }
+            const options = { upsert: true }
+            const updateDoc = {
+                $set: {
+                    quantity: quantity
+                },
+            }
+            const result = await cartCollection.updateOne(query, updateDoc, options)
+            res.send(result)
+        })
+
         // get cart item 
         app.get('/cart/:email', async (req, res) => {
             const email = req.params.email
