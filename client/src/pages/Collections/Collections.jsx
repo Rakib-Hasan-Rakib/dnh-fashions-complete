@@ -123,7 +123,7 @@ const Collections = () => {
         <p className="col-span-2 text-xl md:text-2xl xl:text-3xl text-red-600 capitalize flex justify-center items-center">
           sorry, no data found here
         </p>
-      )}
+      )} 
     </>
   );
 };

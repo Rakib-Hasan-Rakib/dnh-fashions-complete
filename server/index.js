@@ -1,6 +1,9 @@
 const express = require('express')
 const jwt = require('jsonwebtoken')
 const cors = require('cors')
+const multer = require('multer');
+const axios = require('axios');
+const fs = require('fs');
 require('dotenv').config()
 const app = express()
 const port = process.env.PORT || 3000
@@ -9,6 +12,7 @@ const port = process.env.PORT || 3000
 // middleware 
 app.use(cors())
 app.use(express.json())
+const upload = multer({ dest: 'uploads/' });
 
 
 
@@ -214,6 +218,15 @@ async function run() {
             const result = await cartCollection.deleteOne(query)
             res.send(result)
         })
+
+
+        // upload product to database
+        app.post('/uploadProduct', async (req, res) => {
+            const productInfo = req.body;
+            const result = await dressCollection.insertOne(productInfo)
+            res.send(result)
+        })
+
 
 
 
