@@ -8,11 +8,11 @@ import Contact from "../pages/Contact/Contact";
 import Signin from "../pages/signin/Signin";
 import Signup from "../pages/signup/Signup";
 import PrivateRoute from "./PrivateRoute";
-import Cart from "../pages/cart/Cart";
 import DashLayout from "../layout/DashLayout";
 import AddProduct from "../pages/dashboard/adminDash/addproduct/AddProduct";
 import Favourite from "../pages/dashboard/userDash/Favourite";
 import Details from "../pages/details/Details";
+import Cart from "../pages/dashboard/userDash/cart/Cart";
 // import { getSingleProduct } from "../utils/product";
 
 const Route = createBrowserRouter([

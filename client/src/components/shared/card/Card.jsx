@@ -20,11 +20,12 @@ const customStyles = {
 };
 
 const Card = ({ productInfo }) => {
-  const { image, name, price, rating, _id } = productInfo;
+  const { image, name, regularPrice,discountPrice,rating, _id } = productInfo;
   const [fav, setFav] = useState(false);
   const { user } = useAuth();
   const { addToCart } = useCart();
   const [modalIsOpen, setIsOpen] = useState(false);
+  
 
   const handleFav = () => {
     addFav(user?.email, _id, name, price, image);
@@ -51,7 +52,10 @@ const Card = ({ productInfo }) => {
           {name}
         </h2>
         <div className="flex justify-between items-center">
-          <p className="font-semibold text-lg">${price}</p>
+          <div className="flex gap-2 items-end">
+            <p className="font-semibold text-xl lg:text-2xl">${discountPrice}</p>
+            <p className="text-gray-900 line-through">${regularPrice}</p>
+          </div>
           <div className="flex justify-center gap-1 items-center">
             <AiOutlineStar size={24} />
             <p className="font-semibold text-lg">{rating}</p>
@@ -62,9 +66,7 @@ const Card = ({ productInfo }) => {
             View Details
           </button>
           <button
-            onClick={() =>
-              addToCart(user?.email, _id, image, price, name)
-            }
+            onClick={() => addToCart(user?.email, _id, image, price, name)}
             className={`btn-four`}
           >
             Add to cart

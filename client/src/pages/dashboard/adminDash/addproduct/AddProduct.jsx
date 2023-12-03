@@ -5,19 +5,33 @@ import { RiChatDeleteLine } from "react-icons/ri";
 import { MultiSelect } from "react-multi-select-component";
 import axios from "axios";
 import toast from "react-hot-toast";
+import "./addproduct.css";
 
 const AddProduct = () => {
   const [photoUrl, setPhotoUrl] = useState(null);
   const [selectedSize, setSelectedSize] = useState([]);
+  const [selectedColor, setSelectedColor] = useState([]);
   const [disableSubmit, setDisableSubmit] = useState(true);
 
-  const options = [
+  const sizeOptions = [
+    { label: "XS", value: "XS" },
     { label: "S", value: "S" },
     { label: "M", value: "M" },
     { label: "L", value: "L" },
     { label: "XL", value: "XL" },
     { label: "XXL", value: "XXL" },
     { label: "XXXL", value: "XXXL" },
+  ];
+  const colorOptions = [
+    { label: "Red", value: "red" },
+    { label: "Blue", value: "blue" },
+    { label: "Green", value: "green" },
+    { label: "Black", value: "black" },
+    { label: "White", value: "white" },
+    { label: "Purple", value: "purple" },
+    { label: "Yellow", value: "yellow" },
+    { label: "Sky Blue", value: "sky blue" },
+    { label: "Gray", value: "gray" },
   ];
 
   const handleDragOver = (e) => {
@@ -58,17 +72,20 @@ const AddProduct = () => {
     const discountPrice = form.discountPrice.value;
     const category = form.category.value;
     const section = form.section.value;
+    const stock = form.stock.value;
     const description = form.description.value;
 
     const productInfo = {
-      productName,
+      name: productName,
       regularPrice,
       discountPrice,
       category,
       section,
       description,
-      photoUrl,
+      image: photoUrl,
       selectedSize,
+      selectedColor,
+      stock,
     };
 
     axios
@@ -78,6 +95,7 @@ const AddProduct = () => {
           form.reset();
           setPhotoUrl(null);
           setSelectedSize([]);
+          setSelectedColor([]);
           toast.success("Your product uploaded successfully");
         }
       })
@@ -130,7 +148,7 @@ const AddProduct = () => {
                   type="text"
                   name="productName"
                   placeholder="Write your product name here"
-                  className="bg-white border  outline-none rounded-sm w-full px-2 py-1"
+                  className="bg-white border  outline-none rounded-md w-full px-2 py-2"
                   required
                 />
               </div>
@@ -139,7 +157,7 @@ const AddProduct = () => {
                   <label className="italic font-semibold">Category</label>
                   <select
                     name="category"
-                    className="bg-white border outline-none rounded-sm w-full px-2 py-1"
+                    className="bg-white border outline-none rounded-md w-full px-2 py-2"
                     required
                   >
                     <option value="men">Men</option>
@@ -154,57 +172,85 @@ const AddProduct = () => {
                   </label>
                   <select
                     name="section"
-                    className="bg-white border outline-none rounded-sm w-full px-2 py-1"
+                    className="bg-white border outline-none rounded-md w-full px-2 py-2"
                     required
                   >
                     <option value="regular">Regular</option>
                     <option value="featured">Featured</option>
                     <option value="spotlight">Spotlight</option>
-                    <option value="seasonal">Seasonal</option>
+                    <option value="winter">Winter</option>
+                    <option value="summer">Summer</option>
+                    <option value="spring">Spring</option>
                     <option value="latest">Latest</option>
                   </select>
                 </div>
               </div>
-              <div className="flex justify-between items-center gap-7">
-                <div>
+              <div className="flex justify-between items-center gap-6">
+                <div className="basis-1/2">
                   <label className="italic font-semibold" htmlFor="">
                     Regular Price
                   </label>
                   <input
                     type="number"
                     name="regularPrice"
-                    className="bg-white border  outline-none rounded-sm w-full px-2 py-1"
+                    className="bg-white border  outline-none rounded-md w-full px-2 py-2"
                     placeholder="Enter Product Price Here"
                     required
                   />
                 </div>
-                <div>
-                  <label className="italic font-semibold" htmlFor="">
-                    Discount Price
-                  </label>
+                <div className="basis-1/2">
+                  <label className="italic font-semibold">Discount Price</label>
                   <input
                     type="number"
                     name="discountPrice"
-                    className="bg-white border  outline-none rounded-sm w-full px-2 py-1"
+                    className="bg-white border  outline-none rounded-md w-full px-2 py-2"
                     placeholder="Enter Product Price Here"
                     required
                   />
                 </div>
               </div>
-              <div>
-                <MultiSelect
-                  options={options}
-                  value={selectedSize}
-                  onChange={setSelectedSize}
-                  labelledBy="Select"
+              <div className="flex gap-10 items-center">
+                <div className="basis-1/2 flex-shrink-0">
+                  <label className="italic font-semibold">Avalable sizes</label>
+                  <MultiSelect
+                    options={sizeOptions}
+                    value={selectedSize}
+                    onChange={setSelectedSize}
+                    labelledBy="Select"
+                    className="w-full"
+                  />
+                </div>
+                <div className="basis-1/2 flex-shrink-0 flex flex-col">
+                  <label className="italic font-semibold">
+                    Avalable colors
+                  </label>
+                  <MultiSelect
+                    options={colorOptions}
+                    value={selectedColor}
+                    onChange={setSelectedColor}
+                    labelledBy="Select"
+                    isCreatable={true}
+                    className="w-full flex-shrink-0"
+                  />
+                </div>
+              </div>
+              <div className="">
+                <label className="italic font-semibold">Available Stock</label>
+                <input
+                  type="number"
+                  name="stock"
+                  id=""
+                  placeholder="Stock here"
+                  className="bg-white border outline-none rounded-md w-full px-2 py-2"
                 />
               </div>
+
               <div>
                 <label className="italic font-semibold">Description</label>
                 <textarea
                   name="description"
                   rows="5"
-                  className="bg-white border  outline-none rounded-sm w-full px-2 py-1"
+                  className="bg-white border  outline-none rounded-md w-full px-2 py-2"
                   placeholder="Add a short description of the product"
                   required
                 ></textarea>

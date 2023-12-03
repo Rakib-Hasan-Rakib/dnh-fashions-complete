@@ -1,13 +1,14 @@
 import ProductList from "./ProductList";
 import CheckoutForm from "./CheckoutForm";
-import useCart from "../../hooks/useCart";
-import useAuth from "../../hooks/useAuth";
 import { useState } from "react";
+import useAuth from "../../../../hooks/useAuth";
+import useCart from "../../../../hooks/useCart";
 
 const Cart = () => {
   const { cartItems } = useCart();
   const { loading } = useAuth();
   const [total, setTotal] = useState(0);
+  
 
   return (
     <div className="flex flex-col lg:flex-row justify-between items-start gap-4">
@@ -24,18 +25,16 @@ const Cart = () => {
               </tr>
             </thead>
             <tbody>
-              {/* row 1 */}
               {!loading &&
                 cartItems?.map((item) => {
                   return (
                     <ProductList
                       key={item._id}
                       product={item}
-                      setTotal={setTotal}
+                          setTotal={setTotal}
                     />
                   );
                 })}
-              {/* {console.log(total)} */}
             </tbody>
           </table>
         </div>

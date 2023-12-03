@@ -15,7 +15,17 @@ const DetailsModal = ({ modalIsOpen, setIsOpen, id, customStyles }) => {
       })
       .catch((err) => console.log(err));
   }, [id]);
-  const { image, price, name, rating, section } = product;
+  const {
+    image,
+    discountPrice,
+    regularPrice,
+    name,
+    description,
+    selectedSize,
+    selectedColor,
+    rating,
+    section,
+  } = product;
 
   const closeModal = () => {
     setIsOpen(false);
@@ -30,7 +40,7 @@ const DetailsModal = ({ modalIsOpen, setIsOpen, id, customStyles }) => {
         onRequestClose={closeModal}
         contentLabel="Example Modal"
       >
-        <div className="w-3/5 my-20 mx-auto p-3 bg-gray-300">
+        <div className="w-3/5 my-20 mx-auto p-3 bg-gray-100">
           <div className="flex justify-between items-center">
             <button
               onClick={closeModal}
@@ -46,45 +56,38 @@ const DetailsModal = ({ modalIsOpen, setIsOpen, id, customStyles }) => {
             <img
               className="w-full h-80 object-cover object-center rounded-lg"
               src={image}
-              alt=""
+              alt="Product image"
             />
             <div>
-              <h1 className="text-xl md:text-2xl lg:text-3xl font-bold">
+              <h1 className="text-xl md:text-2xl lg:text-3xl font-bold capitalize">
                 {name}
               </h1>
               <p className="italic font-semibold">Our {section} Collection</p>
-              <p>${price}</p>
-              <p>
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                Cupiditate assumenda repellat eaque aliquid tempora ratione
-                atque odio, distinctio temporibus quaerat?
-              </p>
-              <p>Size</p>
-              <div className="flex gap-2">
-                <span className="border border-yellow-500 px-2 py-1 hover:border-red-600 w-12 text-center">
-                  S
-                </span>
-                <span className="border border-yellow-500 px-2 py-1 hover:border-red-600 w-12 text-center">
-                  M
-                </span>
-                <span className="border border-yellow-500 px-2 py-1 hover:border-red-600 w-12 text-center">
-                  L
-                </span>
-                <span className="border border-yellow-500 px-2 py-1 hover:border-red-600 w-12 text-center">
-                  XL
-                </span>
-                <span className="border border-yellow-500 px-2 py-1 hover:border-red-600 w-12 text-center">
-                  XXL
-                </span>
-                <span className="border border-yellow-500 px-2 py-1 hover:border-red-600 w-12 text-center">
-                  XXXL
-                </span>
+              <div className="flex gap-3 items-end">
+                <p className="text-lg lg:text-xl font-bold">${discountPrice}</p>
+                <p className="text-sm line-through">${regularPrice}</p>
               </div>
-              <p>Color</p>
+              <p>{description}</p>
+              <div className="flex gap-2 lg:gap-4 items-center">
+                <p className="font-semibold">Available Sizes</p>
+                {selectedSize?.map((size, i) => {
+                  return (
+                    <p key={i} className="bg-gray-300 px-4 py-1 rounded-md">
+                      {size.value}
+                    </p>
+                  );
+                })}
+              </div>
+
               <div className="flex gap-4">
-                <p className="bg-red-500 w-6 h-6 rounded-full"></p>
-                <p className="bg-pink-500 w-6 h-6 rounded-full"></p>
-                <p className="bg-green-500 w-6 h-6 rounded-full"></p>
+                <p className="font-semibold">Available Colors</p>
+                {selectedColor?.map((color, i) => {
+                  return (
+                    <p key={i} className="capitalize">
+                      {color.value}
+                    </p>
+                  );
+                })}
               </div>
               <button className="btn-four">Add to Cart</button>
             </div>

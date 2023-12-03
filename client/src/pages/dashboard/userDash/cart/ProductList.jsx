@@ -1,11 +1,20 @@
 import { useEffect, useState } from "react";
 import { ImCancelCircle } from "react-icons/im";
-import useCart from "../../hooks/useCart";
 import axios from "axios";
+import { FaPlus, FaMinus } from "react-icons/fa6";
+import useCart from "../../../../hooks/useCart";
 
 const ProductList = ({ product, setTotal }) => {
   const { deleteFromCart, refetch } = useCart();
+  const [amount, setAmount] = useState(1);
   const { _id, name, image, price, quantity } = product;
+
+  const handleIncrease = () => {
+    setAmount(amount + 1);
+  };
+  const handleDecrease = () => {
+    amount > 1 ? setAmount(amount - 1) : setAmount(1);
+  };
 
   const handleDelete = () => {
     deleteFromCart(_id);
@@ -50,10 +59,13 @@ const ProductList = ({ product, setTotal }) => {
       </td>
       <td>${price}</td>
       <td className="flex justify-center items-center gap-2">
-
-        <p>{quantity}</p>
-        <button onClick={() => handlePlusBtn(_id)}>+</button>
-        
+        <button>
+          <FaMinus onClick={() => handleDecrease()} />
+        </button>
+        <p>{amount}</p>
+        <button>
+          <FaPlus onClick={() => handleIncrease()} />
+        </button>
       </td>
       <th>$</th>
     </tr>
