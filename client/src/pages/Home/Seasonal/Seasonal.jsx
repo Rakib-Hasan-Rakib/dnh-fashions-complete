@@ -1,4 +1,4 @@
-import  { useEffect, useState } from "react";
+import  {  useState } from "react";
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 import "react-tabs/style/react-tabs.css";
 import "./Seasonal.css";
@@ -6,27 +6,17 @@ import { Link } from "react-router-dom";
 import AOS from "aos";
 import "aos/dist/aos.css";
 import SectionTitle from "../../../components/shared/sectionTitle/SectionTitle";
+import axios from "axios";
 AOS.init();
 
 const Seasonal = () => {
   const [winterDress, setWinterDress] = useState([]);
-  useEffect(() => {
-    fetch("https://dnh-fashion-server.vercel.app/seasonal/winter")
-      .then((res) => res.json())
-      .then((data) => setWinterDress(data));
-  }, []);
   const [springDress, setSpringDress] = useState([]);
-  useEffect(() => {
-    fetch("https://dnh-fashion-server.vercel.app/seasonal/spring")
-      .then((res) => res.json())
-      .then((data) => setSpringDress(data));
-  }, []);
   const [summerDress, setSummerDress] = useState([]);
-  useEffect(() => {
-    fetch("https://dnh-fashion-server.vercel.app/seasonal/summer")
-      .then((res) => res.json())
-      .then((data) => setSummerDress(data));
-  }, []);
+  axios.get(`${import.meta.env.VITE_API_URL}/seasonal/winter`).then(data=>setWinterDress(data.data))
+  axios.get(`${import.meta.env.VITE_API_URL}/seasonal/spring`).then(data=>setSpringDress(data.data))
+  axios.get(`${import.meta.env.VITE_API_URL}/seasonal/summer`).then(data=>setSummerDress(data.data))
+  
   return (
     <div>
       {SectionTitle(

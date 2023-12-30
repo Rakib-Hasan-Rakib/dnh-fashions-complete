@@ -6,35 +6,37 @@ import useCart from "../../../../hooks/useCart";
 
 const ProductList = ({ product, setTotal }) => {
   const { deleteFromCart, refetch } = useCart();
-  const [amount, setAmount] = useState(1);
   const { _id, name, image, price, quantity } = product;
+  const [amount, setAmount] = useState(quantity);
 
-  const handleIncrease = () => {
+  const handleIncrease = (id) => {
+    axios
+      .put(`${import.meta.env.VITE_API_URL}/cart/${id}`, {
+        quantity: amount + 1,
+      })
+      .then((data) =>{
+        refetch();
+      });
     setAmount(amount + 1);
   };
-  const handleDecrease = () => {
-    amount > 1 ? setAmount(amount - 1) : setAmount(1);
+  const handleDecrease = (id) => {
+    if (amount > 1) {
+      axios
+        .put(`${import.meta.env.VITE_API_URL}/cart/${id}`, {
+          quantity: amount - 1,
+        })
+        .then((data) => {
+          refetch();
+        });
+      setAmount(amount - 1);
+    } else {
+      setAmount(1);
+    }
   };
 
   const handleDelete = () => {
     deleteFromCart(_id);
     refetch();
-  };
-
-  // const handleQuantityChange = (id) => {
-  //   axios
-  //     .put(`${import.meta.env.VITE_API_URL}/cart/${id}`, {
-  //       quantity: uiQuantity,
-  //     })
-  //     .then((data) => console.log(data));
-  // };
-
-  const handlePlusBtn = (id) => {
-    axios
-      .put(`${import.meta.env.VITE_API_URL}/cart/${id}`, {
-        quantity: quantity + 1,
-      })
-      .then((data) => console.log(data));
   };
 
   return (
@@ -55,19 +57,19 @@ const ProductList = ({ product, setTotal }) => {
           </button>
         </div>
 
-        <h2>{name}</h2>
+        <h2 className="font-semibold text-md lg:text-lg capitalize">{name}</h2>
       </td>
       <td>${price}</td>
       <td className="flex justify-center items-center gap-2">
         <button>
-          <FaMinus onClick={() => handleDecrease()} />
+          <FaMinus onClick={() => handleDecrease(_id)} />
         </button>
-        <p>{amount}</p>
+        <p className="border px-4 py-1">{amount}</p>
         <button>
-          <FaPlus onClick={() => handleIncrease()} />
+          <FaPlus onClick={() => handleIncrease(_id)} />
         </button>
       </td>
-      <th>$</th>
+      <th>${amount * price}</th>
     </tr>
   );
 };

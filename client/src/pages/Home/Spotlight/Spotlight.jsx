@@ -1,20 +1,17 @@
-import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import React, { useState } from "react";
 import AOS from "aos";
 import "aos/dist/aos.css";
 import SectionTitle from "../../../components/shared/sectionTitle/SectionTitle";
 import Card from "../../../components/shared/card/Card";
+import axios from "axios";
 AOS.init();
 
 const Spotlight = () => {
   const [spotlightDress, setSpotlightDress] = useState([]);
   const [showMore, setShowMore] = useState(false);
 
-  useEffect(() => {
-    fetch("https://dnh-fashion-server.vercel.app/spotlight")
-      .then((res) => res.json())
-      .then((data) => setSpotlightDress(data));
-  }, []);
+  axios.get(`${import.meta.env.VITE_API_URL}/spotlight`).then(data=>setSpotlightDress(data.data))
+
 
   return (
     <div>
@@ -42,7 +39,7 @@ const Spotlight = () => {
           onClick={() => setShowMore(false)}
           className="flex justify-center my-2 md:my-6"
         >
-          <button className="btn-two">browse collection</button>
+          <button className="btn-four">show less</button>
         </div>
       )}
       {!showMore && (
@@ -50,7 +47,7 @@ const Spotlight = () => {
           onClick={() => setShowMore(true)}
           className="flex justify-center my-2 md:my-6"
         >
-          <button className="btn-two">show more</button>
+          <button className="btn-four">show more</button>
         </div>
       )}
     </div>

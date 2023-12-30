@@ -1,9 +1,6 @@
 const express = require('express')
 const jwt = require('jsonwebtoken')
 const cors = require('cors')
-const multer = require('multer');
-const axios = require('axios');
-const fs = require('fs');
 require('dotenv').config()
 const app = express()
 const port = process.env.PORT || 3000
@@ -12,7 +9,6 @@ const port = process.env.PORT || 3000
 // middleware 
 app.use(cors())
 app.use(express.json())
-const upload = multer({ dest: 'uploads/' });
 
 
 
@@ -192,7 +188,6 @@ async function run() {
         app.put('/cart/:id', async (req, res) => {
             const id = req.params.id
             const { quantity } = req.body
-            console.log(quantity);
             const query = { _id: new ObjectId(id) }
             const options = { upsert: true }
             const updateDoc = {
@@ -203,7 +198,6 @@ async function run() {
             const result = await cartCollection.updateOne(query, updateDoc, options)
             res.send(result)
         })
-
         // get cart item 
         app.get('/cart/:email', async (req, res) => {
             const email = req.params.email
@@ -221,11 +215,11 @@ async function run() {
 
 
         // upload product to database
-        app.post('/uploadProduct', async (req, res) => {
-            const productInfo = req.body;
-            const result = await dressCollection.insertOne(productInfo)
-            res.send(result)
-        })
+        // app.post('/uploadProduct', async (req, res) => {
+        //     const productInfo = req.body;
+        //     const result = await dressCollection.insertOne(productInfo)
+        //     res.send(result)
+        // })
 
 
 

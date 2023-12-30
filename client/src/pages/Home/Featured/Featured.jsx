@@ -7,17 +7,21 @@ import "swiper/css";
 import "swiper/css/free-mode";
 import "swiper/css/pagination";
 import SectionTitle from "../../../components/shared/sectionTitle/SectionTitle";
+import axios from "axios";
 
 const Featured = () => {
   const [featuredDress, setFeaturedDress] = useState([]);
+  axios.get(`${import.meta.env.VITE_API_URL}/featured`).then(data=>{
+    setFeaturedDress(data.data)
+  })
 
-  useEffect(() => {
-    fetch("https://dnh-fashion-server.vercel.app/featured")
-      .then((res) => res.json())
-      .then((data) => {
-        setFeaturedDress(data);
-      });
-  }, []);
+  // useEffect(() => {
+  //   fetch("https://dnh-fashion-server.vercel.app/featured")
+  //     .then((res) => res.json())
+  //     .then((data) => {
+  //       setFeaturedDress(data);
+  //     });
+  // }, []);
 
   return (
     <>

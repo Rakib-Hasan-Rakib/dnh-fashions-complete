@@ -9,15 +9,13 @@ import "./Latest.css";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import SectionTitle from "../../../components/shared/sectionTitle/SectionTitle";
+import axios from "axios";
 
 const Latest = () => {
   const [latestDress, setLatestDress] = useState([]);
 
-  useEffect(() => {
-    fetch("https://dnh-fashion-server.vercel.app/latest")
-      .then((res) => res.json())
-      .then((data) => setLatestDress(data));
-  }, []);
+  axios.get(`${import.meta.env.VITE_API_URL}/latest`).then(data=>setLatestDress(data.data))
+  
 
   return (
     <div className="mb-32">

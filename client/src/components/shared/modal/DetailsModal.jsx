@@ -6,6 +6,7 @@ import Fav from "../fav/Fav";
 
 const DetailsModal = ({ modalIsOpen, setIsOpen, id, customStyles }) => {
   const [product, setProduct] = useState([]);
+  const [fullDescription,setFullDescription]=useState(false)
 
   useEffect(() => {
     axios
@@ -30,6 +31,10 @@ const DetailsModal = ({ modalIsOpen, setIsOpen, id, customStyles }) => {
   const closeModal = () => {
     setIsOpen(false);
   };
+  const fullUiDescription = description?.slice(0)
+  const uiDescription= description?.slice(0,200)
+    
+  
 
   return (
     <div className="w-2/5 overflow-hidden">
@@ -40,7 +45,7 @@ const DetailsModal = ({ modalIsOpen, setIsOpen, id, customStyles }) => {
         onRequestClose={closeModal}
         contentLabel="Example Modal"
       >
-        <div className="w-3/5 my-20 mx-auto p-3 bg-gray-100">
+        <div className="w-3/5 mx-auto p-3 bg-gray-100 rounded-lg">
           <div className="flex justify-between items-center">
             <button
               onClick={closeModal}
@@ -52,13 +57,13 @@ const DetailsModal = ({ modalIsOpen, setIsOpen, id, customStyles }) => {
             <Fav product={product} />
           </div>{" "}
           <hr className="my-2" />
-          <div className="flex flex-col md:flex-row justify-center items-start gap-4 ">
+          <div className="flex flex-col md:flex-row justify-center items-start gap-4 lg:gap-8">
             <img
-              className="w-full h-80 object-cover object-center rounded-lg"
+              className="basis-w-full h-80 object-cover object-center rounded-lg"
               src={image}
               alt="Product image"
             />
-            <div>
+            <div className="space-y-2 basis-2/3">
               <h1 className="text-xl md:text-2xl lg:text-3xl font-bold capitalize">
                 {name}
               </h1>
@@ -67,7 +72,10 @@ const DetailsModal = ({ modalIsOpen, setIsOpen, id, customStyles }) => {
                 <p className="text-lg lg:text-xl font-bold">${discountPrice}</p>
                 <p className="text-sm line-through">${regularPrice}</p>
               </div>
-              <p>{description}</p>
+              {/* <p>{uiDescription}</p> */}
+              <>
+              {fullDescription ? <><p>{fullUiDescription}</p><span onClick={()=>setFullDescription(false)} className="text-sm text-blue-500 cursor-pointer">see less...</span></>:<><p>{uiDescription}</p><span onClick={()=>setFullDescription(true)} className="text-sm text-blue-500 cursor-pointer">see more...</span></> }
+              </>
               <div className="flex gap-2 lg:gap-4 items-center">
                 <p className="font-semibold">Available Sizes</p>
                 {selectedSize?.map((size, i) => {
