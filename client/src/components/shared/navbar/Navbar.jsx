@@ -6,7 +6,7 @@ import useAuth from "../../../hooks/useAuth";
 import CartIcon from "./CartIcon";
 import { useState } from "react";
 import { FaRegHeart } from "react-icons/fa";
-
+import FavIcon from "./FavIcon";
 
 const Navbar = () => {
   const { user, logOut } = useAuth();
@@ -70,22 +70,26 @@ const Navbar = () => {
               {MenuItem}
             </ul>
           </div>
-          <Link
-            to="/"
-            className="text-xl border-2 tracking-wide md:tracking-widest border-white"
-          >
-            <span className="bg-white px-2 md:px-3 py-1 md:py-2">D&H</span>
-            <span className="text-white px-2 md:px-3 py-1 md:py-2">
-              Fashions
-            </span>
-          </Link>
+          <div className="flex items-center mb-4">
+            <Link
+              to="/"
+              className="text-xl border-2 tracking-wide md:tracking-widest border-white"
+            >
+              <span className="bg-white text-black font-bold w-full h-full px-2 md:px-3 pb-0.5">
+                D&H
+              </span>
+              <span className="text-white px-2 md:px-3 py-1 md:py-2">
+                Fashions
+              </span>
+            </Link>
+          </div>
         </div>
         <div className="navbar-center hidden lg:flex">
           <ul className="menu menu-horizontal px-1">{MenuItem}</ul>
         </div>
-        <div className="navbar-end flex items-center gap-3">
+        <div className="navbar-end flex items-center gap-6">
           <Link to="/favourite">
-            <FaRegHeart className="text-white" size={24} />
+            <FavIcon />
           </Link>
 
           <Link to="/cart">

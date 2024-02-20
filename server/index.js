@@ -89,27 +89,14 @@ async function run() {
     });
 
     // get dress by category
-    // get all dress
-    app.get("/category/allDress", async (req, res) => {
+    app.get("/category/:type", async (req, res) => {
+      const type = req.params.type;
+      if (type !== "allDress") {
+        const result = await dressCollection.find({ category: type }).toArray();
+        res.send(result);
+        return;
+      }
       const result = await dressCollection.find().toArray();
-      res.send(result);
-    });
-    // get mens dress
-    app.get("/category/mens", async (req, res) => {
-      const query = { category: "men" };
-      const result = await dressCollection.find(query).toArray();
-      res.send(result);
-    });
-    // get womens dress
-    app.get("/category/womens", async (req, res) => {
-      const query = { category: "women" };
-      const result = await dressCollection.find(query).toArray();
-      res.send(result);
-    });
-    // get childrens dress
-    app.get("/category/childrens", async (req, res) => {
-      const query = { category: "children" };
-      const result = await dressCollection.find(query).toArray();
       res.send(result);
     });
 
@@ -219,12 +206,12 @@ async function run() {
       const result = await cartCollection.deleteOne(query);
       res.send(result);
     });
-    app.delete('/clearCart/:email', async (req, res) => {
+    app.delete("/clearCart/:email", async (req, res) => {
       const email = req.params.email;
-      const query = {email:email}
-      const result = await cartCollection.deleteMany(query)
-      res.send(result)
-    })
+      const query = { email: email };
+      const result = await cartCollection.deleteMany(query);
+      res.send(result);
+    });
 
     // upload product to database
     // app.post('/uploadProduct', async (req, res) => {
@@ -237,7 +224,7 @@ async function run() {
     const tranId = new ObjectId().toString();
     app.post("/order", async (req, res) => {
       const userData = req.body;
-      const orderDetails = req.body.cartItems
+      const orderDetails = req.body.cartItems;
       const data = {
         total_amount: userData?.total,
         currency: userData?.currency,

@@ -11,25 +11,29 @@ const CartProvider = ({ children }) => {
   const [axiosSecure] = useAxiosSecure();
 
   const addToCart = (email, id, image, price, name) => {
-    axios
-      .post(`${import.meta.env.VITE_API_URL}/cart`, {
-        email,
-        id,
-        image,
-        price,
-        name,
-        quantity: 1,
-      })
-      .then((data) => {
-        if (data.data.insertedId) {
-          refetch()
-          toast.success("this item added to your cart");
-        } else {
-          toast.success("this item is already added to cart");
-        }
-        console.log(data.data);
-      })
-      .catch((err) => console.log(err));
+    if (user) {
+      axios
+        .post(`${import.meta.env.VITE_API_URL}/cart`, {
+          email,
+          id,
+          image,
+          price,
+          name,
+          quantity: 1,
+        })
+        .then((data) => {
+          if (data.data.insertedId) {
+            refetch();
+            toast.success("this item added to your cart");
+          } else {
+            toast.success("this item is already added to cart");
+          }
+          console.log(data.data);
+        })
+        .catch((err) => console.log(err));
+    } else {
+      toast.error("Please login first")
+    }
   };
 
   const { refetch, data: cartItems = [] } = useQuery({

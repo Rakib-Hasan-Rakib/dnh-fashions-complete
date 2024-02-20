@@ -11,7 +11,7 @@ import DataNotFoundAnim from "../../components/shared/animations/DataNotFoundAni
 const Collections = () => {
   const [allDress, setAllDress] = useState([]);
   const [searchText, setSearchText] = useState("");
-  const [selectedOpt, setSelectedOpt] = useState("");
+  const [selectedOpt, setSelectedOpt] = useState(null);
 
   const getAllDressReq = () => {
     axios
@@ -91,14 +91,12 @@ const Collections = () => {
             <select
               onChange={(e) => setSelectedOpt(e.target.value)}
               defaultValue={"allDress"}
-              name=""
-              id=""
               className="focus:outline-none outline-none bg-yellow-400 text-white px-8 py-2 rounded-full"
             >
               <option value="allDress">All Dress</option>
-              <option value="mens">Male</option>
-              <option value="womens">Female</option>
-              <option value="childrens">Children</option>
+              <option value="men">Male</option>
+              <option value="women">Female</option>
+              <option value="children">Children</option>
             </select>
           </div>
         </div>
