@@ -1,33 +1,31 @@
 import React from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
-import "swiper/css/pagination";
 import "swiper/css/navigation";
-import {Autoplay, Pagination, Navigation } from "swiper/modules";
+import { Autoplay, Navigation, EffectFade } from "swiper/modules";
 import "./Banner.css";
 import { Link } from "react-router-dom";
+import ButtonOne from "../../../components/shared/buttons/ButtonOne";
 
 const Banner = () => {
   return (
-    <div className="">
+    <div>
       <Swiper
-        spaceBetween={30}
-        centeredSlides={true}
+        effect={"fade"}
+        navigation={true}
         autoplay={{
-          delay: 3000,
+          delay: 2500,
           disableOnInteraction: false,
         }}
-        loop={true}
         pagination={{
           clickable: true,
         }}
-        navigation={true}
-        modules={[Autoplay, Pagination, Navigation]}
+        modules={[EffectFade, Navigation, Autoplay]}
         className="mySwiper"
       >
         <SwiperSlide>
           <img
-            className="relative h-[80vh] w-full object-cover"
+            className="relative h-[100vh] w-full object-cover"
             src="https://i.ibb.co/0DX3194/men.jpg"
             alt="man fashion banner"
           />
@@ -45,14 +43,15 @@ const Banner = () => {
             </p>
             <div className="my-4 md:my-8">
               <Link to="/collections">
-                <button className="btn-one">Browse Collection</button>
+                <ButtonOne text={"Browse Collection"} />
+                {/* <button className="btn-one">Browse Collection</button> */}
               </Link>
             </div>
           </div>
         </SwiperSlide>
         <SwiperSlide>
           <img
-            className="relative h-[80vh] w-full object-cover"
+            className="relative h-[100vh] w-full object-cover"
             src="https://i.ibb.co/ZTjxTNk/women.jpg"
             alt="women fashion banner"
           />
@@ -71,14 +70,15 @@ const Banner = () => {
             </p>
             <div className="my-4 md:my-8">
               <Link to="/collections">
-                <button className="btn-one">Browse Collection</button>
+                {/* <button className="btn-one">Browse Collection</button> */}
+                <ButtonOne text={"Browse Collection"} />
               </Link>
             </div>
           </div>
         </SwiperSlide>
         <SwiperSlide>
           <img
-            className="relative h-[80vh] w-full object-cover"
+            className="relative h-[100vh] w-full object-cover"
             src="https://i.ibb.co/3ScRpbx/children.jpg"
             alt="children fashion banner"
           />
@@ -97,14 +97,15 @@ const Banner = () => {
             </p>
             <div className="my-4 md:my-8">
               <Link to="/collections">
-                <button className="btn-one">Browse Collection</button>
+                {/* <button className="btn-one">Browse Collection</button> */}
+                <ButtonOne text={"Browse Collection"} />
               </Link>
             </div>
           </div>
         </SwiperSlide>
         <SwiperSlide>
           <img
-            className="relative h-[80vh] w-full object-cover"
+            className="relative h-[100vh] w-full object-cover"
             src="https://i.ibb.co/2YsYXKY/sport.jpg"
             alt="sport fashion banner"
           />
@@ -123,7 +124,8 @@ const Banner = () => {
             </p>
             <div className="my-4 md:my-8">
               <Link to="/collections">
-                <button className="btn-one">Browse Collection</button>
+                {/* <button className="btn-one">Browse Collection</button> */}
+                <ButtonOne text={"Browse Collection"} />
               </Link>
             </div>
           </div>

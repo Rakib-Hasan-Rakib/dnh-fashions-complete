@@ -6,7 +6,6 @@ import Fav from "../fav/Fav";
 
 const DetailsModal = ({ modalIsOpen, setIsOpen, id, customStyles }) => {
   const [product, setProduct] = useState([]);
-  const [fullDescription,setFullDescription]=useState(false)
 
   useEffect(() => {
     axios
@@ -31,7 +30,6 @@ const DetailsModal = ({ modalIsOpen, setIsOpen, id, customStyles }) => {
   const closeModal = () => {
     setIsOpen(false);
   };
-  const fullUiDescription = description?.slice(0)
   const uiDescription= description?.slice(0,200)
     
   
@@ -72,10 +70,8 @@ const DetailsModal = ({ modalIsOpen, setIsOpen, id, customStyles }) => {
                 <p className="text-lg lg:text-xl font-bold">${discountPrice}</p>
                 <p className="text-sm line-through">${regularPrice}</p>
               </div>
-              {/* <p>{uiDescription}</p> */}
-              <>
-              {fullDescription ? <><p>{fullUiDescription}</p><span onClick={()=>setFullDescription(false)} className="text-sm text-blue-500 cursor-pointer">see less...</span></>:<><p>{uiDescription}</p><span onClick={()=>setFullDescription(true)} className="text-sm text-blue-500 cursor-pointer">see more...</span></> }
-              </>
+              <p>{uiDescription}</p>
+             
               <div className="flex gap-2 lg:gap-4 items-center">
                 <p className="font-semibold">Available Sizes</p>
                 {selectedSize?.map((size, i) => {

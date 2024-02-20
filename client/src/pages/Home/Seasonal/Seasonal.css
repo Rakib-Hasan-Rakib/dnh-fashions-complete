@@ -1,6 +1,14 @@
-
 .react-tabs__tab--selected {
-  color: red;
+  color: #FBBF24;
   border: none;
-  border-bottom: 2px solid red;
+  border-bottom: 2px solid #FBBF24;
+}
+
+.seasonal-card:hover {
+  background-color: black;
+}
+
+.seasonal-card:hover img {
+  transition: all 0.5s ease-in-out;
+  opacity: 0.5;
 }

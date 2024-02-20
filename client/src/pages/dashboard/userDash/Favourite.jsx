@@ -3,15 +3,17 @@ import useAuth from "../../../hooks/useAuth";
 import axios from "axios";
 import toast from "react-hot-toast";
 import useCart from "../../../hooks/useCart";
+import Container from "../../../components/shared/Container";
 
 const Favourite = () => {
   const [favProduct, setFavProduct] = useState([]);
   const { loading, user } = useAuth();
   const { refetch, addToCart } = useCart();
   useEffect(() => {
-    fetch(`${import.meta.env.VITE_API_URL}/fav/${user?.email}`)
-      .then((res) => res.json())
-      .then((data) => setFavProduct(data));
+    axios
+      .get(`${import.meta.env.VITE_API_URL}/fav/${user?.email}`)
+      .then((data) => setFavProduct(data.data))
+      .catch((err) => console.log(err));
   }, [user]);
 
   const handleDeleteFav = (id) => {
@@ -23,7 +25,6 @@ const Favourite = () => {
           setFavProduct(remaining);
           toast.success("This item removed from your favourite list");
         }
-        console.log(data.data);
       })
       .catch((err) => console.log(err));
   };
@@ -32,23 +33,25 @@ const Favourite = () => {
     refetch();
   };
 
+  console.log(favProduct);
+
   return (
-    <div>
-      <div className="overflow-x-auto">
+    <Container>
+      <div className="overflow-x-auto my-4">
         <table className="table">
           <thead>
-            <tr>
+            <tr className="bg-gray-200 text-center">
               <th>Product</th>
               <th>Name</th>
               <th>Price</th>
-              <th>Action</th>
+              <th className="text-center">Action</th>
             </tr>
           </thead>
           <tbody>
             {!loading &&
               favProduct?.map((item) => {
                 return (
-                  <tr key={item._id}>
+                  <tr key={item._id} className="text-center">
                     <td>
                       <div className="relative w-32">
                         <img
@@ -59,27 +62,29 @@ const Favourite = () => {
                       </div>
                     </td>
                     <td className="text-xl font-semibold">{item.name}</td>
-                    <td className="font-bold">${item.price}</td>
-                    <td className="flex justify-center items-center gap-4">
-                      <button
-                        onClick={() => handleDeleteFav(item._id)}
-                        className="border border-yellow-500 font-semibold hover:bg-yellow-500 hover:text-white hover:duration-200 px-4 py-1 rounded-sm"
-                      >
-                        Remove
-                      </button>
-                      <button
-                        onClick={() =>
-                          handleCart(
-                            item._id,
-                            item.image,
-                            item.price,
-                            item.name
-                          )
-                        }
-                        className="border border-yellow-500 bg-yellow-500 text-white hover:bg-transparent hover:text-black hover:duration-200 font-semibold px-4 py-1 rounded-sm"
-                      >
-                        Add to cart
-                      </button>
+                    <td className="font-bold">${item.discountPrice}</td>
+                    <td>
+                      <div className="flex justify-center items-center gap-4">
+                        <button
+                          onClick={() => handleDeleteFav(item._id)}
+                          className="border border-yellow-500 font-semibold hover:bg-yellow-500 hover:text-white hover:duration-200 px-4 py-1 rounded-sm"
+                        >
+                          Remove
+                        </button>
+                        <button
+                          onClick={() =>
+                            handleCart(
+                              item._id,
+                              item.image,
+                              item.discountPrice,
+                              item.name
+                            )
+                          }
+                          className="border border-yellow-500 bg-yellow-500 text-white hover:bg-transparent hover:text-black hover:duration-200 font-semibold px-4 py-1 rounded-sm"
+                        >
+                          Add to cart
+                        </button>
+                      </div>
                     </td>
                   </tr>
                 );
@@ -87,7 +92,7 @@ const Favourite = () => {
           </tbody>
         </table>
       </div>
-    </div>
+    </Container>
   );
 };
 

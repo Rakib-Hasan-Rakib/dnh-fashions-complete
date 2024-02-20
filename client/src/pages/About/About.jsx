@@ -10,10 +10,11 @@ import ActAnim from "../../components/shared/animations/ActAnim";
 import MissionAnim from "../../components/shared/animations/MissionAnim";
 import StrategyAnim from "../../components/shared/animations/StrategyAnim";
 import ManagementAnim from "../../components/shared/animations/ManagementAnim";
+import Container from "../../components/shared/Container";
 
 const About = () => {
   return (
-    <div>
+    <Container>
       <Helmet>
         <title>D&H Fashions Ltd. | About</title>
       </Helmet>
@@ -329,7 +330,7 @@ const About = () => {
             </div>
           </div>
         </div>
-    </div>
+    </Container>
   );
 };
 

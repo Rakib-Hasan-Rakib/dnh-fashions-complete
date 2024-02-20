@@ -1,14 +1,15 @@
 import { Helmet } from "react-helmet";
 import SectionTitle from "../../components/shared/sectionTitle/SectionTitle";
+import Container from "../../components/shared/Container";
 
 const Disclaimer = () => {
   return (
-    <>
+    <Container>
       <Helmet>
         <title>D&H Fashions Ltd. | Disclaimer</title>
       </Helmet>
         {SectionTitle("Disclaimer & policy", "Terms & Conditions")}
-        <div className="space-y-2">
+        <div className="space-y-2 mb-6 md:mb-10">
           <p className="basis-1/2">
             <span className="disclaimer-header">1. Introduction</span> : This
             disclaimer governs use of our website by you and by using our
@@ -119,8 +120,8 @@ const Disclaimer = () => {
             Road, Hainault Business Park, Ilford, IG6 3UT, UK. You can contact
             us by email to sales@dnhfashions.com.
           </p>
-        </div>
-    </>
+      </div>
+    </Container>
   );
 };
 

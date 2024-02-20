@@ -1,8 +1,4 @@
 import React from "react";
-// import facebookIcon from "https://i.ibb.co/Jypsrh5/facebook-icon.png";
-// import twitterIcon from "https://i.ibb.co/d0kwBS4/twitter-icon.png";
-// import instagramIcon from "https://i.ibb.co/kKZQKKg/instagram-icon.png";
-// import linkedinIcon from "https://i.ibb.co/Q6TTFRr/linkedIn.png";
 import { Link } from "react-router-dom";
 
 const Footer = () => {
@@ -29,42 +25,28 @@ const Footer = () => {
             <h2 className="text-xl md:text-2xl">Some important links </h2>
             <ul className="my-2 text-sm">
               <Link to="/about">
-                <li className="cursor-pointer hover:text-red-600">About Us</li>
+                <li className="footer-link">About Us</li>
               </Link>
               <Link to="/contact">
-                <li className="cursor-pointer hover:text-red-600">
-                  Contact Us
-                </li>
+                <li className="footer-link">Contact Us</li>
               </Link>
-              <li className="cursor-pointer hover:text-red-600">FAQs</li>
+              <li className="footer-link">FAQs</li>
               <Link to="/disclaimer">
-                <li className="cursor-pointer hover:text-red-600">
-                  Privacy Policy
-                </li>
+                <li className="footer-link">Privacy Policy</li>
               </Link>
               <Link to="/disclaimer">
-                <li className="cursor-pointer hover:text-red-600">
-                  Terms & Conditions
-                </li>
+                <li className="footer-link">Terms & Conditions</li>
               </Link>
             </ul>
           </div>
           <div>
             <h2 className="text-xl md:text-2xl">Also visit on </h2>
             <ul className="my-2 text-sm">
-              <li className="cursor-pointer hover:text-red-600">
-                Partnerships
-              </li>
-              <li className="cursor-pointer hover:text-red-600">
-                Affiliate Program
-              </li>
-              <li className="cursor-pointer hover:text-red-600">
-                Store Locator
-              </li>
-              <li className="cursor-pointer hover:text-red-600">
-                Legal Information
-              </li>
-              <li className="cursor-pointer hover:text-red-600">Others</li>
+              <li className="footer-link">Partnerships</li>
+              <li className="footer-link">Affiliate Program</li>
+              <li className="footer-link">Store Locator</li>
+              <li className="footer-link">Legal Information</li>
+              <li className="footer-link">Others</li>
             </ul>
           </div>
         </div>
@@ -103,7 +85,7 @@ const Footer = () => {
       </div>
       <hr className="w-4/5 mx-auto" />
       <p className="text-center text-sm py-4">
-        <span className="text-red-700">&#169; </span>
+        <span className="text-amber-400">&#169; </span>
         {year} dnh fashions ltd. all rights reserved.
       </p>
     </div>

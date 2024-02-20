@@ -75,14 +75,14 @@ const ContactForm = () => {
       ></textarea>
       <div className="flex justify-center items-center gap-2 md:gap-4">
         <input
-          className="text-white font-semibold bg-green-600 hover:bg-green-700 px-4 py-2 rounded-md w-full cursor-pointer"
-          type="submit"
-          value="Submit"
-        />
-        <input
-          className="text-white font-semibold bg-red-500 hover:bg-red-600 px-4 py-2 rounded-md w-full cursor-pointer"
+          className="text-white font-semibold bg-red-500 hover:bg-red-600 transition-all duration-300 px-4 py-2 rounded-md w-full cursor-pointer"
           type="reset"
           value="Clear"
+        />
+        <input
+          className="text-white font-semibold bg-amber-500 hover:bg-amber-600 transition-all duration-300 px-4 py-2 rounded-md w-full cursor-pointer"
+          type="submit"
+          value="Submit"
         />
       </div>
     </form>

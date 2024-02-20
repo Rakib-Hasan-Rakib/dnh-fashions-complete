@@ -72,19 +72,6 @@ const Card = ({ productInfo }) => {
             Add to cart
           </button>
         </div>
-        {/* <div onClick={handleFav} className="cursor-pointer">
-          {fav ? (
-            <AiFillHeart
-              size={36}
-              className="text-red-500 absolute top-2 right-2 bg-black bg-opacity-40 p-2 rounded-full"
-            />
-          ) : (
-            <AiOutlineHeart
-              size={36}
-              className="text-red-500 absolute top-2 right-2 bg-black bg-opacity-40 p-2 rounded-full"
-            />
-          )}
-        </div> */}
         <div className="absolute top-2 right-2">
           <Fav product={productInfo} />
         </div>

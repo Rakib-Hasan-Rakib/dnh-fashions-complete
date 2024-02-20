@@ -4,6 +4,7 @@ import "aos/dist/aos.css";
 import SectionTitle from "../../../components/shared/sectionTitle/SectionTitle";
 import Card from "../../../components/shared/card/Card";
 import axios from "axios";
+import Container from "../../../components/shared/Container";
 AOS.init();
 
 const Spotlight = () => {
@@ -14,7 +15,7 @@ const Spotlight = () => {
 
 
   return (
-    <div>
+    <Container>
       {SectionTitle("style Spotlight", "the latest fashion statements")}
       <div className="grid md:grid-cols-3 lg:grid-cols-4 gap-2 md:gap-4 lg:gap-6">
         {showMore &&
@@ -50,7 +51,7 @@ const Spotlight = () => {
           <button className="btn-four">show more</button>
         </div>
       )}
-    </div>
+    </Container>
   );
 };
 

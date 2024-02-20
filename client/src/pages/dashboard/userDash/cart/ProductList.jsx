@@ -14,7 +14,7 @@ const ProductList = ({ product, setTotal }) => {
       .put(`${import.meta.env.VITE_API_URL}/cart/${id}`, {
         quantity: amount + 1,
       })
-      .then((data) =>{
+      .then((data) => {
         refetch();
       });
     setAmount(amount + 1);
@@ -35,14 +35,14 @@ const ProductList = ({ product, setTotal }) => {
   };
 
   const handleDelete = () => {
-    deleteFromCart(_id);
     refetch();
+    deleteFromCart(_id);
   };
 
   return (
-    <tr>
+    <tr className="text-center">
       <td>
-        <div className="relative w-32">
+        <div className="relative w-32 mx-auto">
           <img
             src={image}
             className="w-full h-32 rounded-md object-cover object-top"
@@ -60,14 +60,16 @@ const ProductList = ({ product, setTotal }) => {
         <h2 className="font-semibold text-md lg:text-lg capitalize">{name}</h2>
       </td>
       <td>${price}</td>
-      <td className="flex justify-center items-center gap-2">
-        <button>
-          <FaMinus onClick={() => handleDecrease(_id)} />
-        </button>
-        <p className="border px-4 py-1">{amount}</p>
-        <button>
-          <FaPlus onClick={() => handleIncrease(_id)} />
-        </button>
+      <td>
+        <div className="flex justify-center items-center gap-2">
+          <button>
+            <FaMinus onClick={() => handleDecrease(_id)} />
+          </button>
+          <p className="border px-4 py-1">{amount}</p>
+          <button>
+            <FaPlus onClick={() => handleIncrease(_id)} />
+          </button>
+        </div>
       </td>
       <th>${amount * price}</th>
     </tr>

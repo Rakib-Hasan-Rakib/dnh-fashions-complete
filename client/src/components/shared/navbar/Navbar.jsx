@@ -5,6 +5,8 @@ import Avatar from "./Avatar";
 import useAuth from "../../../hooks/useAuth";
 import CartIcon from "./CartIcon";
 import { useState } from "react";
+import { FaRegHeart } from "react-icons/fa";
+
 
 const Navbar = () => {
   const { user, logOut } = useAuth();
@@ -54,8 +56,8 @@ const Navbar = () => {
     </>
   );
   return (
-    <Container>
-      <div className="navbar bg-gray-900">
+    <div className="navbar bg-gray-900">
+      <Container>
         <div className="navbar-start">
           <div className="dropdown">
             <label tabIndex={0} className="z-10 lg:hidden">
@@ -82,6 +84,10 @@ const Navbar = () => {
           <ul className="menu menu-horizontal px-1">{MenuItem}</ul>
         </div>
         <div className="navbar-end flex items-center gap-3">
+          <Link to="/favourite">
+            <FaRegHeart className="text-white" size={24} />
+          </Link>
+
           <Link to="/cart">
             <CartIcon />
           </Link>
@@ -93,7 +99,10 @@ const Navbar = () => {
           </div>
           {viewAuthOpt && user && (
             <div className="bg-white flex flex-col absolute top-16 z-10 w-24 md:w-32 rounded-md space-y-1 md:space-y-2 lg:space-y-3">
-              <Link to="/dashboard" className="px-2 md:px-4 py-1 hover:text-yellow-500">
+              <Link
+                to="/dashboard"
+                className="px-2 md:px-4 py-1 hover:text-yellow-500"
+              >
                 Dashboard
               </Link>
               <Link
@@ -121,8 +130,8 @@ const Navbar = () => {
             </div>
           )}
         </div>
-      </div>
-    </Container>
+      </Container>
+    </div>
   );
 };
 

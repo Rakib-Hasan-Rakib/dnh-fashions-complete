@@ -22,6 +22,7 @@ const CartProvider = ({ children }) => {
       })
       .then((data) => {
         if (data.data.insertedId) {
+          refetch()
           toast.success("this item added to your cart");
         } else {
           toast.success("this item is already added to cart");
@@ -55,12 +56,29 @@ const CartProvider = ({ children }) => {
         if (data.data.deletedCount > 0) {
           toast.success("Deleted successfully");
         }
+      })
+      .catch((error) => console.log(error));
+  };
+  const clearCart = (email) => {
+    axiosSecure
+      .delete(`/clearCart/${email}`)
+      .then((data) => {
+        if (data.data.deletedCount > 0) {
+          toast.success("Deleted successfully");
+        }
         console.log(data.data);
       })
       .catch((error) => console.log(error));
   };
 
-  const cartInfo = { addToCart, cartItems, refetch, cartList, deleteFromCart };
+  const cartInfo = {
+    addToCart,
+    cartItems,
+    refetch,
+    cartList,
+    deleteFromCart,
+    clearCart,
+  };
   return (
     <CartContext.Provider value={cartInfo}>{children}</CartContext.Provider>
   );

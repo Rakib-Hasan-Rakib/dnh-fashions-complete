@@ -6,22 +6,22 @@ import useAuth from "../../../hooks/useAuth";
 const Fav = ({ product }) => {
   const [fav, setFav] = useState(false);
   const { user } = useAuth();
-  const { _id, name, price, image } = product;
+  const { _id, name, discountPrice, image } = product;
   const handleFav = () => {
-      addFav(user?.email, _id, name, price, image);
+      addFav(user?.email, _id, name, discountPrice, image);
       setFav(true);
   };
   return (
     <div onClick={handleFav} className="cursor-pointer">
       {fav ? (
         <AiFillHeart
-          size={36}
-          className="text-red-500 bg-black bg-opacity-40 p-2 rounded-full"
+          size={40} 
+          className="text-white bg-black bg-opacity-40 p-2 rounded-full"
         />
       ) : (
         <AiOutlineHeart
-          size={36}
-          className="text-red-500 bg-black bg-opacity-40 p-2 rounded-full"
+          size={40}
+          className="text-white bg-black bg-opacity-40 p-2 rounded-full"
         />
       )}
     </div>

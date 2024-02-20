@@ -13,7 +13,8 @@ import AddProduct from "../pages/dashboard/adminDash/addproduct/AddProduct";
 import Favourite from "../pages/dashboard/userDash/Favourite";
 import Details from "../pages/details/Details";
 import Cart from "../pages/dashboard/userDash/cart/Cart";
-// import { getSingleProduct } from "../utils/product";
+import SuccessPayment from "../components/shared/payments/SuccessPayment";
+import FailPayment from "../components/shared/payments/FailPayment";
 
 const Route = createBrowserRouter([
   {
@@ -34,6 +35,14 @@ const Route = createBrowserRouter([
         element: (
           <PrivateRoute>
             <Cart />
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "/favourite",
+        element: (
+          <PrivateRoute>
+            <Favourite />
           </PrivateRoute>
         ),
       },
@@ -70,6 +79,14 @@ const Route = createBrowserRouter([
         ),
       },
     ],
+  },
+  {
+    path: "/payment/success/:tranId",
+    element: <SuccessPayment />,
+  },
+  {
+    path: "/payment/fail/:tranId",
+    element: <FailPayment />,
   },
 ]);
 
