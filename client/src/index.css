@@ -27,11 +27,11 @@
 }
 
 .active {
-  @apply font-medium tracking-wide text-red-600 transition-colors duration-200 hover:text-red-600 bg-transparent
+  @apply font-medium tracking-wide text-amber-300 transition-all duration-200 hover:text-amber-300 bg-transparent
 }
 
 .default {
-  @apply font-medium tracking-wide text-white transition-colors duration-200 hover:text-red-600
+  @apply font-medium tracking-wide text-white transition-all duration-200 hover:text-amber-300
 }
 
 .size-box {

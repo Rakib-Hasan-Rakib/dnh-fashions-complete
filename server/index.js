@@ -290,6 +290,13 @@ async function run() {
       });
     });
 
+    app.get("/purchased/:email", async (req, res) => {
+      const result = await orderCollection
+        .find({ isPaid: true, ordered_by: req.params.email })
+        .toArray();
+      res.send(result);
+    });
+
     // Send a ping to confirm a successful connection
     await client.db("admin").command({ ping: 1 });
     console.log(

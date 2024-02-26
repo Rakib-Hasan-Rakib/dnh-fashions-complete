@@ -4,7 +4,6 @@ import { HiOutlineBuildingStorefront } from "react-icons/hi2";
 import { AiFillMail } from "react-icons/ai"
 import { BsFillTelephoneInboundFill } from "react-icons/bs"
 import {HiOutlineMailOpen} from 'react-icons/hi'
-// import Map from "../../Components/Map/Map";
 import { Helmet } from "react-helmet";
 import SectionTitle from "../../components/shared/sectionTitle/SectionTitle";
 import Container from "../../components/shared/Container";
@@ -70,7 +69,7 @@ const Contact = () => {
           </div>
         </div>
       </div>
-      <div className="my-8 md:my-12 lg:my-16">{/* <Map /> */}</div>
+      <div className="my-8 md:my-12 lg:my-16"></div>
     </Container>
   );
 };

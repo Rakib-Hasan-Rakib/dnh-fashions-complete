@@ -43,7 +43,7 @@ const DashLayout = () => {
           </li>
           <li>
             <NavLink
-              to="/dashboard"
+              to="/dashboard/purchased"
               className={({ isActive }) => (isActive ? "active" : "default")}
             >
               Purchased

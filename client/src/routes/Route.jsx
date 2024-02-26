@@ -15,6 +15,7 @@ import Details from "../pages/details/Details";
 import Cart from "../pages/dashboard/userDash/cart/Cart";
 import SuccessPayment from "../components/shared/payments/SuccessPayment";
 import FailPayment from "../components/shared/payments/FailPayment";
+import Purchased from "../pages/dashboard/userDash/purchased/Purchased";
 
 const Route = createBrowserRouter([
   {
@@ -67,6 +68,14 @@ const Route = createBrowserRouter([
         element: (
           <PrivateRoute>
             <Favourite />
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "/dashboard/purchased",
+        element: (
+          <PrivateRoute>
+            <Purchased />
           </PrivateRoute>
         ),
       },
