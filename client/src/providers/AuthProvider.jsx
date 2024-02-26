@@ -20,14 +20,21 @@ const googleProvider = new GoogleAuthProvider();
 
 const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
-  // const [role, setRole] = useState(null);
+  const [admin, setAdmin] = useState(false);
   const [loading, setLoading] = useState(true);
 
-  // useEffect(() => {
-  //   if (user) {
-  //     getRole(user.email).then((data) => setRole(data));
-  //   }
-  // }, [user]);
+  useEffect(() => {
+    if (user) {
+      axios
+        .get(`${import.meta.env.VITE_API_URL}/user/${user?.email}`)
+        .then((data) => {
+          if (data.data.role === "admin") {
+            setAdmin(true);
+          }
+        })
+        .catch((err) => console.log(err));
+    }
+  }, [user]);
 
   const createUser = (email, password) => {
     setLoading(true);
@@ -83,6 +90,7 @@ const AuthProvider = ({ children }) => {
 
   const authInfo = {
     user,
+    admin,
     loading,
     setLoading,
     createUser,

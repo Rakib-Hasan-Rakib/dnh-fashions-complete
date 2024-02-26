@@ -16,6 +16,9 @@ import Cart from "../pages/dashboard/userDash/cart/Cart";
 import SuccessPayment from "../components/shared/payments/SuccessPayment";
 import FailPayment from "../components/shared/payments/FailPayment";
 import Purchased from "../pages/dashboard/userDash/purchased/Purchased";
+import UserDashAnim from "../components/shared/animations/UserDashAnim";
+import AdminRoute from "./AdminRoute";
+import UserRoute from "./UserRoute";
 
 const Route = createBrowserRouter([
   {
@@ -59,7 +62,17 @@ const Route = createBrowserRouter([
         path: "/dashboard",
         element: (
           <PrivateRoute>
-            <Cart />
+            <UserDashAnim />
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "/dashboard/cart",
+        element: (
+          <PrivateRoute>
+            <UserRoute>
+              <Cart />
+            </UserRoute>
           </PrivateRoute>
         ),
       },
@@ -67,7 +80,9 @@ const Route = createBrowserRouter([
         path: "/dashboard/favproduct",
         element: (
           <PrivateRoute>
-            <Favourite />
+            <UserRoute>
+              <Favourite />
+            </UserRoute>
           </PrivateRoute>
         ),
       },
@@ -75,7 +90,9 @@ const Route = createBrowserRouter([
         path: "/dashboard/purchased",
         element: (
           <PrivateRoute>
-            <Purchased />
+            <UserRoute>
+              <Purchased />
+            </UserRoute>
           </PrivateRoute>
         ),
       },
@@ -83,7 +100,9 @@ const Route = createBrowserRouter([
         path: "/dashboard/addproduct",
         element: (
           <PrivateRoute>
-            <AddProduct />
+            <AdminRoute>
+              <AddProduct />
+            </AdminRoute>
           </PrivateRoute>
         ),
       },

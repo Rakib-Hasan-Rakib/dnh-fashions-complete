@@ -8,6 +8,7 @@ const Summery = () => {
   const { user } = useAuth();
   const [nameValue, setNameValue] = useState(user?.displayName);
 
+
   let productTotal = 0;
   let deleveryCharge = 0;
   for (let i of cartItems) {
@@ -108,7 +109,7 @@ const Summery = () => {
               <select
                 name="currency"
                 id="currency"
-                className="border border-yellow-500 w-full py-1 px-2 rounded-md outline-none" require
+                className="border border-yellow-500 w-full py-1 px-2 rounded-md outline-none" required
               >
                 <option value="USD">USD</option>
                 <option value="BDT">BDT</option>

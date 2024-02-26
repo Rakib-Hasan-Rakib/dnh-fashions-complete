@@ -33,6 +33,7 @@ const Signup = () => {
   const navigate = useNavigate();
 
   const onSubmit = (data) => {
+    const name = data.name
     const email = data.email;
     const password = data.password;
     const image = data.photo[0];
@@ -108,7 +109,7 @@ const Signup = () => {
                   <input
                     type="text"
                     {...register("name", { required: true })}
-                    placeholder="Write your Name here"
+                    placeholder="Name here"
                     className="border border-gray-900 outline-none rounded-sm px-4 py-2 bg-transparent"
                   />
                 </div>
@@ -119,7 +120,7 @@ const Signup = () => {
                   <input
                     type="email"
                     {...register("email", { required: true })}
-                    placeholder="Write your Email here"
+                    placeholder="Email here"
                     className="border border-gray-900 outline-none rounded-sm px-4 py-2 bg-transparent"
                   />
                 </div>

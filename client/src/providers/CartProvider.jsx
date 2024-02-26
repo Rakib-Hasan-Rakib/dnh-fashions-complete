@@ -28,11 +28,10 @@ const CartProvider = ({ children }) => {
           } else {
             toast.success("this item is already added to cart");
           }
-          console.log(data.data);
         })
         .catch((err) => console.log(err));
     } else {
-      toast.error("Please login first")
+      toast.error("Please login first");
     }
   };
 

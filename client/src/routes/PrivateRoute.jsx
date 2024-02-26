@@ -1,3 +1,4 @@
+import LoadingSpin from "../components/shared/spin/LoadingSpin";
 import useAuth from "../hooks/useAuth";
 import { Navigate, useLocation } from "react-router-dom";
 
@@ -6,7 +7,7 @@ const PrivateRoute = ({ children }) => {
   const location = useLocation();
 
   if (loading) {
-    return "Loading...";
+    return <LoadingSpin />;
   }
 
   if (user) {

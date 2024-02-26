@@ -55,11 +55,21 @@ async function run() {
       const email = req.params.email;
       const user = req.body;
       const query = { email: email };
+      const existedUser = await usersCollection.findOne({ email: email });
+      if (existedUser?.email === email) {
+        return
+      }
       const options = { upsert: true };
       const updateDoc = {
         $set: user,
       };
       const result = await usersCollection.updateOne(query, updateDoc, options);
+      res.send(result);
+    });
+
+    app.get("/user/:email", async (req, res) => {
+      const result = await usersCollection.findOne({ email: req.params.email });
+      // const result = usersCollection.find().toArray();
       res.send(result);
     });
 

@@ -3,7 +3,7 @@ import { ImSpinner4 } from "react-icons/im";
 const LoadingSpin = () => {
   return (
     <>
-      <ImSpinner4 size={28} className="animate-spin w-full text-amber-500" />
+      <ImSpinner4 size={40} className="animate-spin text-amber-500 w-full my-32 md:my-40 lg:my-52" />
     </>
   );
 };

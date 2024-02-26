@@ -1,12 +1,17 @@
 import { Link, NavLink, Outlet } from "react-router-dom";
 import Container from "../components/shared/Container";
+import useAuth from "../hooks/useAuth";
+import { AiFillHome } from "react-icons/ai";
+import { MdCollections } from "react-icons/md";
+import { FaHeart, FaShoppingCart } from "react-icons/fa";
+import { BiSolidPurchaseTag } from "react-icons/bi";
 
 const DashLayout = () => {
+  const { user, admin } = useAuth();
   return (
     <div className="drawer lg:drawer-open">
       <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
       <div className="drawer-content">
-        {/* Page content here */}
         <label
           htmlFor="my-drawer-2"
           className="btn btn-primary drawer-button lg:hidden"
@@ -23,44 +28,82 @@ const DashLayout = () => {
           aria-label="close sidebar"
           className="drawer-overlay"
         ></label>
-        <ul className="menu p-2 w-48 min-h-full bg-base-200 text-base-content">
-          {/* Sidebar content here */}
-          <li>
-            <NavLink
-              to="/dashboard"
-              className={({ isActive }) => (isActive ? "active" : "default")}
-            >
-              Cart
-            </NavLink>
-          </li>
-          <li>
-            <NavLink
-              to="/dashboard/favproduct"
-              className={({ isActive }) => (isActive ? "active" : "default")}
-            >
-              Favourite
-            </NavLink>
-          </li>
-          <li>
-            <NavLink
-              to="/dashboard/purchased"
-              className={({ isActive }) => (isActive ? "active" : "default")}
-            >
-              Purchased
-            </NavLink>
-            <NavLink
-              to="/dashboard/addproduct"
-              className={({ isActive }) => (isActive ? "active" : "default")}
-            >
-              Add Product
-            </NavLink>
-          </li>
+        <div className="menu p-2 w-48 min-h-full bg-gray-200 text-base-content px-8">
+          {!admin && user && (
+            <>
+              <NavLink
+                to="/dashboard/cart"
+                className={({ isActive }) =>
+                  isActive ? "activeNav" : "defaultNav"
+                }
+              >
+                <div className="py-2 font-semibold flex items-center gap-2">
+                  <FaShoppingCart size={20} />
+                  Cart
+                </div>
+              </NavLink>
+              <NavLink
+                to="/dashboard/favproduct"
+                className={({ isActive }) =>
+                  isActive ? "activeNav" : "defaultNav"
+                }
+              >
+                <div className="py-2 font-semibold flex items-center gap-2">
+                  <FaHeart size={20} />
+                  Favourite
+                </div>
+              </NavLink>
+              <NavLink
+                to="/dashboard/purchased"
+                className={({ isActive }) =>
+                  isActive ? "activeNav" : "defaultNav"
+                }
+              >
+                <div className="py-2 font-semibold flex items-center gap-2">
+                  <BiSolidPurchaseTag size={20} />
+                  Purchased
+                </div>
+              </NavLink>
+            </>
+          )}
+
+          {user && admin && (
+            <>
+              <NavLink
+                to="/dashboard/addproduct"
+                className={({ isActive }) =>
+                  isActive ? "activeNav" : "defaultNav"
+                }
+              >
+                Add Product
+              </NavLink>
+            </>
+          )}
           <div className="mt-auto p-2 flex flex-col">
-            <hr />
-            <Link to="/">Home</Link>
-            <Link to="/collections">Collections</Link>
+            <NavLink
+              to="/"
+              className={({ isActive }) =>
+                isActive ? "activeNav" : "defaultNav"
+              }
+            >
+              <div className="py-1 font-semibold flex items-center gap-2">
+                <AiFillHome size={22} />
+                Home
+              </div>
+            </NavLink>
+            <NavLink
+              to="/collections"
+              className={({ isActive }) =>
+                isActive ? "activeNav" : "defaultNav"
+              }
+            >
+              <div className="py-1 font-semibold flex items-center gap-2">
+                <MdCollections size={22} />
+                Collections
+              </div>
+            </NavLink>
           </div>
-        </ul>
+        </div>
       </div>
     </div>
   );

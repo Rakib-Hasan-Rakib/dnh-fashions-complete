@@ -30,8 +30,21 @@
   @apply font-medium tracking-wide text-amber-300 transition-all duration-200 hover:text-amber-300 bg-transparent
 }
 
+.activeNav {
+  @apply font-medium tracking-wide text-amber-500 transition-all duration-200 hover:text-amber-500 
+}
+
 .default {
-  @apply font-medium tracking-wide text-white transition-all duration-200 hover:text-amber-300
+  @apply font-medium tracking-wide text-white transition-all duration-200 hover:text-amber-500
+}
+
+.defaultNav {
+  @apply font-medium tracking-wide text-black transition-all duration-200 hover:text-amber-500 
+}
+
+.defaultNav:hover {
+  background: none !important;
+  border: none !important;
 }
 
 .size-box {
