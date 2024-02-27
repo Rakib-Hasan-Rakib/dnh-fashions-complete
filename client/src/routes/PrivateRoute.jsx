@@ -7,7 +7,11 @@ const PrivateRoute = ({ children }) => {
   const location = useLocation();
 
   if (loading) {
-    return <LoadingSpin />;
+    return (
+      <div className="my-32 md:my-40 lg:my-52">
+        <LoadingSpin />
+      </div>
+    );
   }
 
   if (user) {

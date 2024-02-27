@@ -5,6 +5,7 @@ import { AiFillHome } from "react-icons/ai";
 import { MdCollections } from "react-icons/md";
 import { FaHeart, FaShoppingCart } from "react-icons/fa";
 import { BiSolidPurchaseTag } from "react-icons/bi";
+import { FiMenu } from "react-icons/fi";
 
 const DashLayout = () => {
   const { user, admin } = useAuth();
@@ -14,9 +15,9 @@ const DashLayout = () => {
       <div className="drawer-content">
         <label
           htmlFor="my-drawer-2"
-          className="btn btn-primary drawer-button lg:hidden"
+          className="drawer-button lg:hidden"
         >
-          Open drawer
+          <FiMenu size={24} className="m-2" />
         </label>
         <Container>
           <Outlet />

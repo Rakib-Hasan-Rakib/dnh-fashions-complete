@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import useAuth from "../../../../hooks/useAuth";
 import SinglePurchased from "./SinglePurchased";
 import DataNotFoundAnim from "../../../../components/shared/animations/DataNotFoundAnim";
+import { formatDateFromObjectId } from "../../../../utils/dateformat";
 
 const Purchased = () => {
   const [purchasedProduct, setPurchasedProduct] = useState([]);
@@ -13,11 +14,6 @@ const Purchased = () => {
       .then((data) => setPurchasedProduct(data.data))
       .catch((err) => console.log(err));
   }, []);
-
-  const formatDateFromObjectId = (objectId) => {
-    const timestamp = new Date(parseInt(objectId.substring(0, 8), 16) * 1000);
-    return timestamp.toLocaleDateString();
-  };
 
   return (
     <>

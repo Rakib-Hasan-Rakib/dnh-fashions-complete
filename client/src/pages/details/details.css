@@ -1,0 +1,31 @@
+.magnifier {
+    width: 200vw !important;
+}
+
+.magnifier-image {
+    border-radius: 1%;
+}
+
+@media (max-width:576px) {
+    .magnifier {
+        width: 90vw !important;
+    }
+}
+
+@media (min-width:577px) and (max-width:768px) {
+    .magnifier {
+        width: 400vw !important;
+    }
+}
+
+@media (min-width:769px) and (max-width:1024px) {
+    .magnifier {
+        width: 350vw !important;
+    }
+}
+
+@media (min-width:1400px) {
+    .magnifier {
+        width: 80vw !important;
+    }
+}

@@ -6,7 +6,11 @@ const UserRoute = ({ children }) => {
   const { loading, admin } = useAuth();
 
   if (loading) {
-    return <LoadingSpin />;
+    return (
+      <div className="my-32 md:my-40 lg:my-52">
+        <LoadingSpin />
+      </div>
+    );
   }
 
   if (!admin) {

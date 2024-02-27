@@ -36,6 +36,9 @@ async function run() {
     const cartCollection = client.db("dnhFashionsDB").collection("carts");
     const favCollection = client.db("dnhFashionsDB").collection("favs");
     const orderCollection = client.db("dnhFashionsDB").collection("orders");
+    const feedbackCollection = client
+      .db("dnhFashionsDB")
+      .collection("feedbacks");
 
     // const indexKey = { name: 1 }
     // const indexOption = { name: 'title' }
@@ -57,7 +60,7 @@ async function run() {
       const query = { email: email };
       const existedUser = await usersCollection.findOne({ email: email });
       if (existedUser?.email === email) {
-        return
+        return;
       }
       const options = { upsert: true };
       const updateDoc = {
@@ -304,6 +307,18 @@ async function run() {
       const result = await orderCollection
         .find({ isPaid: true, ordered_by: req.params.email })
         .toArray();
+      res.send(result);
+    });
+
+    app.post("/feedback", async (req, res) => {
+      const feedback = req.body;
+      const result = await feedbackCollection.insertOne(feedback);
+      res.send(result);
+    });
+    app.get("/feedback/:id", async (req, res) => {
+      const id = req.params.id;
+      console.log(id);
+      const result = await feedbackCollection.find({ id: id }).toArray();
       res.send(result);
     });
 
