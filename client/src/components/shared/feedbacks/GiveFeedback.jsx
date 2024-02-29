@@ -47,7 +47,6 @@ const GiveFeedback = ({ id, setRealTimeFeedback }) => {
         }
       })
       .catch((err) => console.log(err));
-    console.log(formData);
   };
 
   const handleImageChange = (event) => {

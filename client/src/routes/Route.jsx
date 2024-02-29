@@ -26,6 +26,7 @@ import StoreLocator from "../pages/footer_unused/StoreLocator";
 import LegalInfo from "../pages/footer_unused/LegalInfo";
 import Others from "../pages/footer_unused/Others";
 import FAQs from "../pages/footer_unused/FAQs";
+import Users from "../pages/dashboard/adminDash/manageUsers/Users";
 
 const Route = createBrowserRouter([
   {
@@ -115,6 +116,16 @@ const Route = createBrowserRouter([
           <PrivateRoute>
             <AdminRoute>
               <AddProduct />
+            </AdminRoute>
+          </PrivateRoute>
+        ),
+      },
+      {
+        path: "/dashboard/users",
+        element: (
+          <PrivateRoute>
+            <AdminRoute>
+              <Users />
             </AdminRoute>
           </PrivateRoute>
         ),

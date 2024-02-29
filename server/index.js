@@ -70,9 +70,53 @@ async function run() {
       res.send(result);
     });
 
+    //get all users
+    app.get("/users", async (req, res) => {
+      const result = await usersCollection.find().sort({ _id: -1 }).toArray();
+      res.send(result);
+    });
+
+    //get a single user
     app.get("/user/:email", async (req, res) => {
       const result = await usersCollection.findOne({ email: req.params.email });
       // const result = usersCollection.find().toArray();
+      res.send(result);
+    });
+
+    // make staff a user
+    app.patch("user/patch/:email", async (req, res) => {
+      console.log(req.params.email);
+      const query = { email: req.params.email };
+      const updateDoc = {
+        $set: {
+          role: "staff",
+        },
+      };
+      // const result = await usersCollection.updateOne(query, updateDoc);
+      // res.send(result);
+    });
+
+    // delete a user and everything of the user
+    app.delete("/user/delete/:email", async (req, res) => {
+      const email = req.params.email;
+      const cartDelete = await cartCollection.deleteMany({ email: email });
+      const favDelete = await favCollection.deleteMany({ email: email });
+      const feedbackDelete = await feedbackCollection.deleteMany({
+        email: email,
+      });
+      const orderDelete = await orderCollection.deleteMany({
+        ordered_by: email,
+      });
+      const userDelete = await usersCollection.deleteOne({
+        email: email,
+      });
+      const result = [
+        cartDelete,
+        favDelete,
+        feedbackDelete,
+        orderDelete,
+        userDelete,
+      ];
       res.send(result);
     });
 

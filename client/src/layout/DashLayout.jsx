@@ -2,8 +2,8 @@ import { Link, NavLink, Outlet } from "react-router-dom";
 import Container from "../components/shared/Container";
 import useAuth from "../hooks/useAuth";
 import { AiFillHome } from "react-icons/ai";
-import { MdCollections } from "react-icons/md";
-import { FaHeart, FaShoppingCart } from "react-icons/fa";
+import { MdCollections, MdOutlineAddCircle } from "react-icons/md";
+import { FaHeart, FaShoppingCart, FaUser } from "react-icons/fa";
 import { BiSolidPurchaseTag } from "react-icons/bi";
 import { FiMenu } from "react-icons/fi";
 
@@ -13,10 +13,7 @@ const DashLayout = () => {
     <div className="drawer lg:drawer-open">
       <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
       <div className="drawer-content">
-        <label
-          htmlFor="my-drawer-2"
-          className="drawer-button lg:hidden"
-        >
+        <label htmlFor="my-drawer-2" className="drawer-button lg:hidden">
           <FiMenu size={24} className="m-2" />
         </label>
         <Container>
@@ -71,12 +68,26 @@ const DashLayout = () => {
           {user && admin && (
             <>
               <NavLink
+                to="/dashboard/users"
+                className={({ isActive }) =>
+                  isActive ? "activeNav" : "defaultNav"
+                }
+              >
+                <div className="py-1 font-semibold flex items-center gap-2">
+                  <FaUser size={22} />
+                  Users
+                </div>
+              </NavLink>
+              <NavLink
                 to="/dashboard/addproduct"
                 className={({ isActive }) =>
                   isActive ? "activeNav" : "defaultNav"
                 }
               >
-                Add Product
+                <div className="py-1 font-semibold flex items-center gap-2">
+                  <MdOutlineAddCircle size={22} />
+                  Add Product
+                </div>
               </NavLink>
             </>
           )}
