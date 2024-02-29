@@ -30,23 +30,32 @@ const Footer = () => {
               <Link to="/contact">
                 <li className="footer-link">Contact Us</li>
               </Link>
-              <li className="footer-link">FAQs</li>
-              <Link to="/disclaimer">
-                <li className="footer-link">Privacy Policy</li>
+              <Link to="/faqs">
+                <li className="footer-link">FAQs</li>
               </Link>
               <Link to="/disclaimer">
-                <li className="footer-link">Terms & Conditions</li>
+                <li className="footer-link">Privacy Policy</li>
               </Link>
             </ul>
           </div>
           <div>
             <h2 className="text-xl md:text-2xl">Also visit on </h2>
             <ul className="my-2 text-sm">
-              <li className="footer-link">Partnerships</li>
-              <li className="footer-link">Affiliate Program</li>
-              <li className="footer-link">Store Locator</li>
-              <li className="footer-link">Legal Information</li>
-              <li className="footer-link">Others</li>
+              <Link to="/partnership">
+                <li className="footer-link">Partnership</li>
+              </Link>
+              <Link to="/affiliate">
+                <li className="footer-link">Affiliate Program</li>
+              </Link>
+              <Link to="/storeLocator">
+                <li className="footer-link">Store Locator</li>
+              </Link>
+              <Link to="/legalInfo">
+                <li className="footer-link">Legal Information</li>
+              </Link>
+              <Link to="/others">
+                <li className="footer-link">Others</li>
+              </Link>
             </ul>
           </div>
         </div>

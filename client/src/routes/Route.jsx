@@ -19,6 +19,13 @@ import Purchased from "../pages/dashboard/userDash/purchased/Purchased";
 import UserDashAnim from "../components/shared/animations/UserDashAnim";
 import AdminRoute from "./AdminRoute";
 import UserRoute from "./UserRoute";
+import Partnership from "../pages/footer_unused/Partnership";
+import ErrorAnim from "../components/shared/animations/ErrorAnim";
+import Affiliate from "../pages/footer_unused/Affiliate";
+import StoreLocator from "../pages/footer_unused/StoreLocator";
+import LegalInfo from "../pages/footer_unused/LegalInfo";
+import Others from "../pages/footer_unused/Others";
+import FAQs from "../pages/footer_unused/FAQs";
 
 const Route = createBrowserRouter([
   {
@@ -50,6 +57,12 @@ const Route = createBrowserRouter([
           </PrivateRoute>
         ),
       },
+      { path: "/faqs", element: <FAQs /> },
+      { path: "/partnership", element: <Partnership /> },
+      { path: "/affiliate", element: <Affiliate /> },
+      { path: "/storeLocator", element: <StoreLocator /> },
+      { path: "/legalInfo", element: <LegalInfo /> },
+      { path: "/others", element: <Others /> },
     ],
   },
   { path: "/signin", element: <Signin /> },
