@@ -21,6 +21,7 @@ const Details = () => {
   const [product, setProduct] = useState([]);
   const [loading, setLoading] = useState(false);
   const [showFeedbacks, setShowFeedbacks] = useState(false);
+  const [realTimeFeedback,setRealTimeFeedback]=useState(false)
   const location = useLocation();
   const from = location.state?.from?.pathName || "/";
 
@@ -118,21 +119,28 @@ const Details = () => {
             {showFeedbacks ? (
               <button
                 onClick={() => setShowFeedbacks(false)}
-                className="btn-three"
+                className="btn-four"
               >
                 hide feedbacks
               </button>
             ) : (
               <button
                 onClick={() => setShowFeedbacks(true)}
-                className="btn-three"
+                className="btn-four"
               >
                 view feedbacks
               </button>
             )}
           </div>
-          {/* <GiveFeedback id={_id} /> */}
-          {showFeedbacks && <SeeFeedback id={_id} />}
+          {showFeedbacks && user && <GiveFeedback id={_id} setRealTimeFeedback={setRealTimeFeedback} />}
+
+          {showFeedbacks && (
+            <SeeFeedback
+              id={_id}
+              showFeedbacks={showFeedbacks}
+              realTimeFeedback={realTimeFeedback}
+            />
+          )}
         </Container>
       ) : (
         <LoadingSpin />

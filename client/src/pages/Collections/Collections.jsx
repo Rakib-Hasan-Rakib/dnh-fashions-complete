@@ -21,7 +21,7 @@ const Collections = () => {
   };
   const getSearchedDressReq = () => {
     axios
-      .get(`http://localhost:3000/dressSearch/${searchText}`)
+      .get(`${import.meta.env.VITE_API_URL}/dressSearch/${searchText}`)
       .then((data) => {
         if (data.data.length > 0) {
           setAllDress(data.data);

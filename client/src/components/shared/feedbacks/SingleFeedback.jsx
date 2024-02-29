@@ -2,7 +2,6 @@ import { formatDateFromObjectId } from "../../../utils/dateformat";
 
 const SingleFeedback = ({ feedback }) => {
   const { _id, userPhoto, userName, productImage, feedbackValue } = feedback;
-  console.log(feedback);
   const date = formatDateFromObjectId(_id);
 
   return (
@@ -21,7 +20,7 @@ const SingleFeedback = ({ feedback }) => {
             </p>
           </div>
         </div>
-        <div className="px-2 py-1 rounded-lg bg-white space-y-1">
+        <div className="px-2 py-1 rounded-lg bg- space-y-1">
           <p>{feedbackValue}</p>
           <img
             src={productImage}

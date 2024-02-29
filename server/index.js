@@ -317,8 +317,10 @@ async function run() {
     });
     app.get("/feedback/:id", async (req, res) => {
       const id = req.params.id;
-      console.log(id);
-      const result = await feedbackCollection.find({ id: id }).toArray();
+      const result = await feedbackCollection
+        .find({ id: id })
+        .sort({ _id: -1 })
+        .toArray();
       res.send(result);
     });
 

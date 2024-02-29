@@ -1,8 +1,7 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 import "react-tabs/style/react-tabs.css";
 import "./Seasonal.css";
-import { Link } from "react-router-dom";
 import AOS from "aos";
 import "aos/dist/aos.css";
 import SectionTitle from "../../../components/shared/sectionTitle/SectionTitle";
@@ -16,15 +15,24 @@ const Seasonal = () => {
   const [winterDress, setWinterDress] = useState([]);
   const [springDress, setSpringDress] = useState([]);
   const [summerDress, setSummerDress] = useState([]);
-  axios
-    .get(`${import.meta.env.VITE_API_URL}/seasonal/winter`)
-    .then((data) => setWinterDress(data.data));
-  axios
-    .get(`${import.meta.env.VITE_API_URL}/seasonal/spring`)
-    .then((data) => setSpringDress(data.data));
-  axios
-    .get(`${import.meta.env.VITE_API_URL}/seasonal/summer`)
-    .then((data) => setSummerDress(data.data));
+  useEffect(() => {
+    axios
+      .get(`${import.meta.env.VITE_API_URL}/seasonal/winter`)
+      .then((data) => setWinterDress(data.data))
+      .catch((err) => console.log(err));
+  });
+  useEffect(() => {
+    axios
+      .get(`${import.meta.env.VITE_API_URL}/seasonal/spring`)
+      .then((data) => setSpringDress(data.data))
+      .catch((err) => console.log(err));
+  });
+  useEffect(() => {
+    axios
+      .get(`${import.meta.env.VITE_API_URL}/seasonal/summer`)
+      .then((data) => setSummerDress(data.data))
+      .catch((err) => console.log(err));
+  });
 
   return (
     <Container>
